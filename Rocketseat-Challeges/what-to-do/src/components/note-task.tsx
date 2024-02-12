@@ -18,7 +18,7 @@ export function NoteTask({ task }: NoteTaskProps) {
             outline-none focus-visible:ring-2 focus-visible:ring-lime-500">
                 <div className="flex flex-col pb-2">
                     <div className="flex items-start gap-8 pr-4">
-                        <Circle size={22} className='text-blue-400'/>
+                        <Circle size={22} className='text-green-400'/>
 
                         <p className="w-[450px]">
                             {task.title}
