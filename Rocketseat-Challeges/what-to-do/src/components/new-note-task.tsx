@@ -1,9 +1,11 @@
 import * as Dialog from "@radix-ui/react-dialog";
 import { PlusCircle, X } from "lucide-react";
-import { ChangeEvent, useState } from "react";
+import { ChangeEvent, FormEvent, useState } from "react";
+import { toast } from "sonner";
 
 export function NewNoteTask() {
     const [showShouldShowOnBoarding, setShouldOnBoarding] = useState(true)
+    const [task, setTask] = useState('')
     
     
     function handleStartEditor() {
@@ -11,10 +13,20 @@ export function NewNoteTask() {
     }
 
     function handleContentChange(event: ChangeEvent<HTMLTextAreaElement>) {
+        setTask(event.target.value)
+        
         if (event.target.value === '') {
             setShouldOnBoarding(true)
         }
     }
+
+    function handleSaveTask(event: FormEvent) {
+        event.preventDefault()
+
+        console.log(task)
+        toast.success('Tarefa criada com sucesso!')
+    }
+    
     
     
     return (
@@ -72,6 +84,7 @@ export function NewNoteTask() {
                     <button
                         type='button'
                         className='w-full bg-green-600 py-4 font-medium text-center text-green-950 outline-none hover:bg-green-700 hover:text-stone-200 duration-75'
+                        onClick={handleSaveTask}
                     >
                         Criar task!
                     </button>
