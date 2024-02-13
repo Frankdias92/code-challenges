@@ -3,64 +3,126 @@ import { PlusCircle, X } from "lucide-react";
 import { ChangeEvent, FormEvent, useState } from "react";
 import { toast } from "sonner";
 
-export function NewNoteTask() {
+
+interface NewNoteTaskProps {
+    onTaskCreated: (title: string, content: string, finished: boolean) => void
+}
+
+
+
+let speechRecognition: SpeechRecognition | null = null
+
+
+export function NewNoteTask({ onTaskCreated }: NewNoteTaskProps) {
     const [showShouldShowOnBoarding, setShouldOnBoarding] = useState(true)
-    const [task, setTask] = useState('')
+    const [title, setTitle] = useState('')
+    const [isRecording, setIsRecording] = useState(false)
+    const [content, setContent] = useState('')
+    const [finished, setFinished] = useState(false)
     
     
     function handleStartEditor() {
         setShouldOnBoarding(false)
     }
 
-    function handleContentChange(event: ChangeEvent<HTMLTextAreaElement>) {
-        setTask(event.target.value)
+    function handleTitleChange(event: ChangeEvent<HTMLInputElement>) {
+        setTitle(event.target.value)
         
         if (event.target.value === '') {
             setShouldOnBoarding(true)
         }
     }
 
+
+
+    function handleContentTextChange(event: ChangeEvent<HTMLTextAreaElement>) {
+        setContent(event.target.value)
+    }
+
     function handleSaveTask(event: FormEvent) {
         event.preventDefault()
 
-        console.log(task)
+        if (title === '') {
+            return
+        }
+
+        onTaskCreated(title, content, finished)
+
+        setTitle('')
+        setContent('')
+        setShouldOnBoarding(true)
+        
         toast.success('Tarefa criada com sucesso!')
     }
     
+    function handleStartRecording() {
+        setIsRecording(true)
+
+        const isSpeechRecongnitionAPIavailable =
+            'SpeechRecognition' in window
+            || 'webkitSpeechRecognition' in  window
+
+        if (isSpeechRecongnitionAPIavailable) {
+            alert('Infelizmente seu navegador não suporta essa aplicação de gravação.')
+            return
+        }
+
+        setIsRecording(true)
+        setShouldOnBoarding(false)
+        
+        const SpeechRecognitionAPI = window.SpeechRecognition || window.webkitSpeechRecognition
+        
+        speechRecognition = new SpeechRecognitionAPI()
+
+        speechRecognition.lang = 'pt-BR'
+        speechRecognition.continuous = true
+        speechRecognition.maxAlternatives = 1
+        speechRecognition.interimResults = true
+
+        speechRecognition.onresult = (event) => {
+            const transcription = Array.from(event.results).reduce((text, result) => {
+                return text.concat(result[0].transcript)
+            }, '')
+
+            setTitle(transcription)
+        }
+
+        speechRecognition.onerror = (event) => {
+            console.log(event)
+        }
+
+        speechRecognition.start()
+    }
     
+    function handleStopRecording() {
+        setIsRecording(false)
+
+        if (speechRecognition != null) {
+            speechRecognition.stop()
+        }
+    }
     
+
     return (
 
         <Dialog.Root>
-            <div className="flex flex-1 -translate-y-1/2 gap-x-8
-             hover:text-stone-200">
-
-                <input 
-                type="text" 
-                placeholder="Busque por suas taresfas" 
-                className="w-[736px] bg-stone-700 text-3xl font-semibold tracking-tight
-                placeholder:text-stone-500
-                rounded-md p-2 items-center outline-none focus-visible:ring-2 focus-visible:ring-lime-500"
-                />
-
-                <Dialog.Trigger
-                    className="flex flex-1 items-center bg-green-600 px-4 rounded-md
-                    font-bold text-stone-50 outline-none hover:bg-green-700 duration-75 gap-4
-                    focus-visible:ring-2 focus-visible:ring-lime-500"
-                >
-                    <PlusCircle />
-                    Criar task?
-                </Dialog.Trigger>
-            </div>
+            <Dialog.Trigger
+                className="flex flex-1 p-3 items-center gap-2 sm:gap-4 bg-green-600 rounded-md
+                font-bold text-stone-50 outline-none hover:bg-green-700 sm:duration-75
+                sm:text-3xl focus-visible:ring-2 focus-visible:ring-lime-500 duration-200"
+            >
+                <PlusCircle className="size-8 sm:size-10"/>
+                Task?
+            </Dialog.Trigger>   
 
             <Dialog.Portal>
                 <Dialog.Overlay className='inset-0 fixed bg-black/60'/>     
                 <Dialog.Content
-                    className='absolute  left-1/2 top-1/2 
-                    -translate-x-1/2 -translate-y-1/2 max-w-[734px] w-full h-[45vh]
-                    bg-stone-700 rounded-md flex flex-1 flex-col outline-none overflow-hidden'>
+                    className='absolute  left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2
+                    sm:max-w-[640px] w-full sm:h-[45vh] h-full sm:rounded-md 
+                    bg-stone-700 flex flex-1 flex-col outline-none overflow-hidden duration-200'>
 
-                    <Dialog.Close className='fixed right-2 top-2 bg-stone-800 rounded-full p-1 text-stone-400 hover:text-red-400'>
+                    <Dialog.Close className='fixed right-2 top-2 bg-stone-800 rounded-full p-1 text-stone-400 hover:text-red-400 outline-none focus-visible:ring-2 focus-visible:ring-lime-500'>
                         <X size={20}/>
                     </Dialog.Close>
                     
@@ -69,25 +131,52 @@ export function NewNoteTask() {
 
                         {showShouldShowOnBoarding ? (
                             
-                            <p className="text-sm leading-6 text-stone-400">Comece <button className="font-medium text-green-500 hover:underline">gravando uma tarefa</button> em áudio ou se preferir <button onClick={handleStartEditor} className="font-medium text-green-500 hover:underline">utilize apenas texto</button>.</p>
+                            <p className="text-sm leading-6 text-stone-400">Comece <button onClick={handleStartRecording} className="font-medium text-green-500 hover:underline">gravando uma tarefa</button> em áudio ou se preferir <button onClick={handleStartEditor} className="font-medium text-green-500 hover:underline">utilize apenas texto</button>.</p>
                             ) : (
-                                <textarea 
-                                    autoFocus
-                                    className="text-sm leading-6 text-stone-400 bg-transparent resize-none flex-1 outline-none"
-                                    onChange={handleContentChange}
-                                />
+                                <div className="flex flex-col space-y-4">
+                                    <input 
+                                        autoFocus
+                                        type="text" 
+                                        placeholder="Defina sua task"
+                                        onChange={handleTitleChange}
+                                        value={title}
+                                        className="bg-black/5 rounded-md p-4 outline-none focus-visible:ring-2 focus-visible:ring-lime-500"
+                                    />
+                                    <textarea 
+                                        className="text-sm leading-6 text-stone-400 bg-black/5 resize-y flex-1 rounded-md outline-none focus-visible:ring-2 focus-visible:ring-lime-500
+                                        "
+                                        onChange={handleContentTextChange}
+                                        value={content}
+                                    />
+                                    <span>{finished}</span>
+                                </div>
                             )}
 
                     </div>
 
+                    {isRecording ? (
+                        <button
+                            type='button'
+                            onClick={handleStopRecording}
+                            className='flex w-full bg-stone-900 py-4 font-medium text-center text-slate-300 outline-none hover:bg-stone-900 hover:text-stone-200 duration-75
+                            items-center justify-center gap-2'
+                        >
+                            <div className="size-3 rounded-full bg-red-500  animate-pulse"/>
+                            Gravando! (clique para finalizar)
+                        </button>
+                    ) : (
+                        <button
+                            type='button'
+                            className='w-full bg-green-600 py-4 font-medium text-center text-green-950 hover:bg-green-700 hover:text-stone-200 duration-75
+                            outline-none focus-visible:ring-2 focus-visible:ring-green-400 group focus:scale-105'
+                            onClick={handleSaveTask}
+                        >
+                            <span className="group-focus:text-stone-100 group-focus:animate-spin ">
+                            Criar task!
+                            </span>
+                        </button>
+                    )}
 
-                    <button
-                        type='button'
-                        className='w-full bg-green-600 py-4 font-medium text-center text-green-950 outline-none hover:bg-green-700 hover:text-stone-200 duration-75'
-                        onClick={handleSaveTask}
-                    >
-                        Criar task!
-                    </button>
                 </Dialog.Content>
                 
             </Dialog.Portal>

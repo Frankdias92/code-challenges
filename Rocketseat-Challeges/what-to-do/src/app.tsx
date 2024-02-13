@@ -1,25 +1,107 @@
-import { Header } from "./components/header";
+import { ChangeEvent, useState } from "react";
 import { NewNoteTask } from "./components/new-note-task";
 import { NoteTask } from "./components/note-task";
 
 
-const task = {
-  title: 'Task title',
-  content: 'task comment'
+interface Task {
+  id: string
+  title: string
+  content: string
+  finished: () => void
 }
 
-
 export function App() {
-  return (
-    <section className="flex flex-col h-[100vh]">
-      <Header />
+  const [search, setSearch] = useState('')
+  const [tasks, setTasks] = useState<Task[]>(() => {
+  const tasksOnStorage = localStorage.getItem('tasks')
 
-      <div className="mx-auto max-w-6xl gap-y-4 flex flex-col">
-        <NewNoteTask />
+    if (tasksOnStorage) {
+      return JSON.parse(tasksOnStorage)
+    }
+    
+    return []
+  })
+
+
+  function onTaskCreated({title, content, finished}: Task ) {
+    const newTask = {
+        id: crypto.randomUUID(),
+        title,
+        content,
+        finished: String,
+    }
+
+    const tasksArray = [newTask, ...tasks]
+
+    
+    setTasks(tasksArray)
+
+    
+    localStorage.setItem('tasks', JSON.stringify(tasksArray))
+  }
+
+  function onTaskDeleted(id: string) {
+    const newTaskArray = tasks.filter((task) => {
+      return task.id != id
+    })
+
+    setTasks(newTaskArray)
+    
+    localStorage.setItem('tasks', JSON.stringify(newTaskArray))
+  }
+
+  function onTaskFinished({id, finished}: Task) {
+    const newTaskFinished = tasks.filter((task) => {
+      return task.id != id
+    })
+
+    setTasks(newTaskFinished)
+
+    localStorage.setItem('tasks', JSON.stringify(newTaskFinished))
+  }
+  
+  
+
+  function handleSearch(event: ChangeEvent<HTMLInputElement>) {
+    const query = event.target.value
+
+    setSearch(query)
+  }
+
+  const filteredTasks = search != ''
+    ? tasks.filter(task => task.title.toLocaleLowerCase().includes(search.toLocaleLowerCase()))
+    : tasks
+  
+
+  return (
+    <section className="m-auto max-w-6xl gap-y-4 flex flex-col md:w-[732px] px-5 md:px-0">
+
+      <div className="flex sm:flex-row mx-auto items-center -translate-y-1/2
+      gap-4">
+        <input 
+          type="text" 
+          placeholder="Busque por suas taresfas" 
+          className="bg-stone-700 text-3xl font-semibold tracking-tight
+          placeholder:text-stone-500 p-3 w-3/4
+          rounded-md items-center outline-none focus-visible:ring-2 focus-visible:ring-lime-500"
+          onChange={handleSearch}
+        />
+
+        
+        <NewNoteTask onTaskCreated={onTaskCreated}  />
+      </div>
+      
+      <div className="flex flex-col gap-4">
+
 
         <div className="h-px bg-stone-700"/>
 
-        <NoteTask task={task} />
+        {filteredTasks.map((task) => {
+          return (
+            <NoteTask key={task.id} task={task} onTaskDeleted={onTaskDeleted} onTaskFinished={onTaskFinished}/>
+          )
+        })}
+        
       </div>
     </section>
   )

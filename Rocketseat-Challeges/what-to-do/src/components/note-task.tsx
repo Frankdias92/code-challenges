@@ -1,38 +1,73 @@
 import * as Dialog from '@radix-ui/react-dialog'
-import { Circle, Trash2, X } from 'lucide-react'
+import { CheckCircle, Circle, Trash2, X } from 'lucide-react'
+import { useState } from 'react'
 
 interface NoteTaskProps {
     task: {
+        id: string
         title: string
-        content: string
+        content?: string
     }
+
+    onTaskDeleted: (id: string) => void
+
+    onTaskFinished: (id: string) => void
 }
 
-export function NoteTask({ task }: NoteTaskProps) {
+
+
+
+export function NoteTask({ task, onTaskDeleted, onTaskFinished }: NoteTaskProps) {
+    const [finished, setFinished] = useState(false)
+
+
+    function handleTaskFinished() {
+        setFinished(true)
+
+        if (finished === true) {
+            setFinished(false)
+        }
+
+        
+
+    }
+    
     return (
 
         <Dialog.Root>
-            <Dialog.Trigger className="flex flex-row w-full justify-between items-start
+            <Dialog.Trigger className="flex flex-row w-auto justify-between items-start
             rounded-md bg-stone-700 py-5 px-7 h-20 relative overflow-hidden
             hover:ring-2 hover:ring-stone-500 text-left
             outline-none focus-visible:ring-2 focus-visible:ring-lime-500">
                 <div className="flex flex-col pb-2">
-                    <div className="flex items-start gap-8 pr-4">
-                        <Circle size={22} className='text-green-400'/>
+                    <div className="flex items-start gap-8 ">
 
-                        <p className="w-[450px]">
+                        {finished === true ? (
+                            <button onClick={() => onTaskFinished} className='z-20'>
+                                <Circle size={22} className='text-green-400'/>
+                            </button>
+                        ) : (
+                            <button onClick={() => onTaskFinished} className='z-20'>
+                                <CheckCircle size={22} className='text-green-400'/>
+                            </button>
+                        )}
+
+
+                        <p className="overflow-hidden absolute w-3/5 sm:w-4/5 pl-10">
                             {task.title}
                         </p>
                     </div>
 
                     <div className="h-8 overflow-hidden">
-                        <p className="text-stone-500 w-[450px] pl-10 text-sm font-medium leading-6">
+                        <p className="text-stone-500 overflow-hidden absolute w-3/5 sm:w-4/5 pl-10 text-sm font-medium leading-6">
                             {task.content}
                         </p>
                     </div>
                 </div>
 
-                <button className="text-red-500 rounded-md
+                <button
+                    onClick={() => onTaskDeleted(task.id)}
+                    className="text-red-500 rounded-md
                 outline-none focus-visible:ring-2 focus-visible:ring-red-400
                 hover:text-red-400 duration-75">
                     <Trash2 />
@@ -46,16 +81,30 @@ export function NoteTask({ task }: NoteTaskProps) {
                 <Dialog.Overlay className='inset-0 fixed bg-black/60'/> 
                 
                 <Dialog.Content
-                    className='z-10 left-1/2 top-1/2 absolute
-                    -translate-x-1/2 -translate-y-1/2 max-w-[734px] w-full h-[45vh]
-                    bg-stone-700 rounded-md flex flex-col outline-none overflow-hidden'>
+                    className='z-50 left-1/2 top-1/2 absolute
+                    -translate-x-1/2 -translate-y-1/2
+                    sm:max-w-[640px] w-full sm:h-[45vh] h-full sm:rounded-md 
+                    bg-stone-700 rounded-md flex flex-col outline-none overflow-hidden duration-200'>
 
                     <Dialog.Close className='absolute right-2 top-2 bg-stone-800 rounded-full p-1 text-stone-400 hover:text-red-400'>
                         <X size={20}/>
                     </Dialog.Close>
                     
                     <div className='flex flex-1 flex-col gap-3 p-5'>
-                        <span>{task.title}</span>
+                        <div className='flex gap-4'>
+                            {finished ? (
+                                <button onClick={handleTaskFinished} className='z-20'>
+                                    <Circle size={22} className='text-green-400'/>
+                                </button>
+                            ) : (
+                                <button onClick={handleTaskFinished} className='z-20'>
+                                    <CheckCircle size={22} className='text-green-400'/>
+                                </button>
+                            )}
+                            <span className='text-xl'>{task.title}</span>
+                        </div>
+                        <div className="h-px bg-stone-600"/>
+                        <span className='texstone'>{task.content}</span>
                     </div>
                         
 
@@ -63,7 +112,7 @@ export function NoteTask({ task }: NoteTaskProps) {
                         type='button'
                         className='w-full bg-stone-800 py-4 font-medium text-center to-stone-500 outline-none group'
                     >
-                        Deseja <span className='text-red-500 group-hover:underline'>apagar tarefa</span>?
+                        Deseja <span onClick={() => onTaskDeleted(task.id)} className='text-red-500 group-hover:underline'>apagar tarefa</span>?
                     </button>
                 </Dialog.Content>
                 
