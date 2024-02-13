@@ -7,13 +7,13 @@ interface Task {
   id: string
   title: string
   content: string
-  finished: () => void
+  finished?: boolean
 }
 
 export function App() {
   const [search, setSearch] = useState('')
   const [tasks, setTasks] = useState<Task[]>(() => {
-  const tasksOnStorage = localStorage.getItem('tasks')
+    const tasksOnStorage = localStorage.getItem('tasks')
 
     if (tasksOnStorage) {
       return JSON.parse(tasksOnStorage)
@@ -23,12 +23,14 @@ export function App() {
   })
 
 
-  function onTaskCreated({title, content, finished}: Task ) {
+
+
+  function onTaskCreated(title: string, content: string, finished: boolean) {
     const newTask = {
         id: crypto.randomUUID(),
         title,
         content,
-        finished: String,
+        finished,
     }
 
     const tasksArray = [newTask, ...tasks]
@@ -48,19 +50,20 @@ export function App() {
     setTasks(newTaskArray)
     
     localStorage.setItem('tasks', JSON.stringify(newTaskArray))
-  }
+  } 
 
-  function onTaskFinished({id, finished}: Task) {
-    const newTaskFinished = tasks.filter((task) => {
-      return task.id != id
+  function onTaskFinished(id: string, finished: boolean) {
+    const updatedTask = tasks.map(task => {
+      if (task.id === id) {
+        return { ...task, finished}
+      }
+
+      return task
     })
 
-    setTasks(newTaskFinished)
-
-    localStorage.setItem('tasks', JSON.stringify(newTaskFinished))
+    setTasks(updatedTask)
+    localStorage.setItem('tasks', JSON.stringify(updatedTask))
   }
-  
-  
 
   function handleSearch(event: ChangeEvent<HTMLInputElement>) {
     const query = event.target.value
@@ -70,7 +73,7 @@ export function App() {
 
   const filteredTasks = search != ''
     ? tasks.filter(task => task.title.toLocaleLowerCase().includes(search.toLocaleLowerCase()))
-    : tasks
+    : tasks || []
   
 
   return (
@@ -88,7 +91,7 @@ export function App() {
         />
 
         
-        <NewNoteTask onTaskCreated={onTaskCreated}  />
+        <NewNoteTask onTaskCreated={onTaskCreated} />
       </div>
       
       <div className="flex flex-col gap-4">
@@ -96,9 +99,14 @@ export function App() {
 
         <div className="h-px bg-stone-700"/>
 
-        {filteredTasks.map((task) => {
+        {Array.isArray(filteredTasks) && filteredTasks.map((task) => {
           return (
-            <NoteTask key={task.id} task={task} onTaskDeleted={onTaskDeleted} onTaskFinished={onTaskFinished}/>
+            <NoteTask 
+              key={task.id}
+              task={task}
+              onTaskDeleted={onTaskDeleted} 
+              onTaskFinished={(id, finished) => onTaskFinished(id, finished)}
+            />
           )
         })}
         

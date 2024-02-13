@@ -1,6 +1,6 @@
 import * as Dialog from "@radix-ui/react-dialog";
-import { PlusCircle, X } from "lucide-react";
-import { ChangeEvent, FormEvent, useState } from "react";
+import { CheckCircle, Circle, PlusCircle, X } from "lucide-react";
+import { ChangeEvent, FormEvent, useEffect, useState } from "react";
 import { toast } from "sonner";
 
 
@@ -16,10 +16,25 @@ let speechRecognition: SpeechRecognition | null = null
 export function NewNoteTask({ onTaskCreated }: NewNoteTaskProps) {
     const [showShouldShowOnBoarding, setShouldOnBoarding] = useState(true)
     const [title, setTitle] = useState('')
-    const [isRecording, setIsRecording] = useState(false)
     const [content, setContent] = useState('')
+    const [isRecording, setIsRecording] = useState(false)
     const [finished, setFinished] = useState(false)
-    
+
+    useEffect(() => {
+        const storeState = localStorage.getItem('tasks')
+
+        if (storeState !== null) {
+            setFinished(JSON.parse(storeState))
+        }
+    }, [])
+
+    useEffect(() => {
+        localStorage.setItem('tasks', JSON.stringify(finished))
+    }, [finished])
+
+    function handleFinishedTaskChange() {
+        setFinished(!finished)
+    }
     
     function handleStartEditor() {
         setShouldOnBoarding(false)
@@ -32,7 +47,6 @@ export function NewNoteTask({ onTaskCreated }: NewNoteTaskProps) {
             setShouldOnBoarding(true)
         }
     }
-
 
 
     function handleContentTextChange(event: ChangeEvent<HTMLTextAreaElement>) {
@@ -56,16 +70,10 @@ export function NewNoteTask({ onTaskCreated }: NewNoteTaskProps) {
     }
     
     function handleStartRecording() {
+        
+        if (!('SpeechRecognition' in window || 'webkitSpeechRecognition' in  window))
+        
         setIsRecording(true)
-
-        const isSpeechRecongnitionAPIavailable =
-            'SpeechRecognition' in window
-            || 'webkitSpeechRecognition' in  window
-
-        if (isSpeechRecongnitionAPIavailable) {
-            alert('Infelizmente seu navegador não suporta essa aplicação de gravação.')
-            return
-        }
 
         setIsRecording(true)
         setShouldOnBoarding(false)
@@ -134,6 +142,19 @@ export function NewNoteTask({ onTaskCreated }: NewNoteTaskProps) {
                             <p className="text-sm leading-6 text-stone-400">Comece <button onClick={handleStartRecording} className="font-medium text-green-500 hover:underline">gravando uma tarefa</button> em áudio ou se preferir <button onClick={handleStartEditor} className="font-medium text-green-500 hover:underline">utilize apenas texto</button>.</p>
                             ) : (
                                 <div className="flex flex-col space-y-4">
+                                    <button 
+                                        type='button' 
+                                        onClick={() => handleFinishedTaskChange()} 
+                                        className='z-20'
+                                    >
+                        
+                                        {finished ? (
+                                            <Circle size={22} className='text-green-400'/>
+                                        ) : (
+                                            <CheckCircle size={22} className='text-green-400'/>
+                                        )}
+                                    </button>
+
                                     <input 
                                         autoFocus
                                         type="text" 
@@ -143,12 +164,10 @@ export function NewNoteTask({ onTaskCreated }: NewNoteTaskProps) {
                                         className="bg-black/5 rounded-md p-4 outline-none focus-visible:ring-2 focus-visible:ring-lime-500"
                                     />
                                     <textarea 
-                                        className="text-sm leading-6 text-stone-400 bg-black/5 resize-y flex-1 rounded-md outline-none focus-visible:ring-2 focus-visible:ring-lime-500
-                                        "
+                                        className="text-sm leading-6 text-stone-400 bg-black/5 resize-y flex-1 rounded-md outline-none focus-visible:ring-2 focus-visible:ring-lime-500"
                                         onChange={handleContentTextChange}
                                         value={content}
                                     />
-                                    <span>{finished}</span>
                                 </div>
                             )}
 

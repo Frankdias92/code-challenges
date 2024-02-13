@@ -1,40 +1,33 @@
 import * as Dialog from '@radix-ui/react-dialog'
 import { CheckCircle, Circle, Trash2, X } from 'lucide-react'
 import { useState } from 'react'
-
 interface NoteTaskProps {
     task: {
         id: string
         title: string
         content?: string
+        finished?: boolean
     }
 
     onTaskDeleted: (id: string) => void
-
-    onTaskFinished: (id: string) => void
+    onTaskFinished: (id: string, finished: boolean) => void
 }
 
 
 
 
 export function NoteTask({ task, onTaskDeleted, onTaskFinished }: NoteTaskProps) {
-    const [finished, setFinished] = useState(false)
+    const [isChecked, setIsChecked] = useState(task.finished || false)
 
-
-    function handleTaskFinished() {
-        setFinished(true)
-
-        if (finished === true) {
-            setFinished(false)
-        }
-
-        
-
+    const handleCheckChange = () => {
+        setIsChecked(!isChecked)
+        onTaskFinished(task.id, !isChecked)
     }
-    
+
     return (
 
         <Dialog.Root>
+
             <Dialog.Trigger className="flex flex-row w-auto justify-between items-start
             rounded-md bg-stone-700 py-5 px-7 h-20 relative overflow-hidden
             hover:ring-2 hover:ring-stone-500 text-left
@@ -42,15 +35,19 @@ export function NoteTask({ task, onTaskDeleted, onTaskFinished }: NoteTaskProps)
                 <div className="flex flex-col pb-2">
                     <div className="flex items-start gap-8 ">
 
-                        {finished === true ? (
-                            <button onClick={() => onTaskFinished} className='z-20'>
+                        
+                    <button 
+                        type='button' 
+                        onClick={() => handleCheckChange()} 
+                        className='z-20'
+                        >
+        
+                        {task.finished ? (
                                 <Circle size={22} className='text-green-400'/>
-                            </button>
                         ) : (
-                            <button onClick={() => onTaskFinished} className='z-20'>
                                 <CheckCircle size={22} className='text-green-400'/>
-                            </button>
                         )}
+                    </button>
 
 
                         <p className="overflow-hidden absolute w-3/5 sm:w-4/5 pl-10">
@@ -92,15 +89,6 @@ export function NoteTask({ task, onTaskDeleted, onTaskFinished }: NoteTaskProps)
                     
                     <div className='flex flex-1 flex-col gap-3 p-5'>
                         <div className='flex gap-4'>
-                            {finished ? (
-                                <button onClick={handleTaskFinished} className='z-20'>
-                                    <Circle size={22} className='text-green-400'/>
-                                </button>
-                            ) : (
-                                <button onClick={handleTaskFinished} className='z-20'>
-                                    <CheckCircle size={22} className='text-green-400'/>
-                                </button>
-                            )}
                             <span className='text-xl'>{task.title}</span>
                         </div>
                         <div className="h-px bg-stone-600"/>
