@@ -72,7 +72,10 @@ export function App() {
   }
 
   const filteredTasks = search != ''
-    ? tasks.filter(task => task.title.toLocaleLowerCase().includes(search.toLocaleLowerCase()))
+    ? tasks.filter(task => 
+        task.content.toLocaleLowerCase().includes(search.toLocaleLowerCase()) ||
+        task.title.toLocaleLowerCase().includes(search.toLocaleLowerCase())
+      )
     : tasks || []
   
 
