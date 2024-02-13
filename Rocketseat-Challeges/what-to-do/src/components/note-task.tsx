@@ -1,13 +1,18 @@
 import * as Dialog from '@radix-ui/react-dialog'
 import { CheckCircle, Circle, Trash2, X } from 'lucide-react'
 import { useState } from 'react'
+
+
+
+export interface Task {
+    id: string
+    title: string
+    content?: string
+    finished?: boolean
+}
+
 interface NoteTaskProps {
-    task: {
-        id: string
-        title: string
-        content?: string
-        finished?: boolean
-    }
+    task: Task
 
     onTaskDeleted: (id: string) => void
     onTaskFinished: (id: string, finished: boolean) => void
@@ -15,12 +20,12 @@ interface NoteTaskProps {
 
 
 
-
 export function NoteTask({ task, onTaskDeleted, onTaskFinished }: NoteTaskProps) {
     const [isChecked, setIsChecked] = useState(task.finished || false)
 
     const handleCheckChange = () => {
-        setIsChecked(!isChecked)
+        const newCheckedState = !isChecked
+        setIsChecked(newCheckedState)
         onTaskFinished(task.id, !isChecked)
     }
 
@@ -38,14 +43,14 @@ export function NoteTask({ task, onTaskDeleted, onTaskFinished }: NoteTaskProps)
                         
                     <button 
                         type='button' 
-                        onClick={() => handleCheckChange()} 
+                        onClick={handleCheckChange} 
                         className='z-20'
                         >
         
                         {task.finished ? (
-                                <Circle size={22} className='text-green-400'/>
-                        ) : (
                                 <CheckCircle size={22} className='text-green-400'/>
+                            ) : (
+                                <Circle size={22} className='text-green-400'/>
                         )}
                     </button>
 
@@ -86,9 +91,23 @@ export function NoteTask({ task, onTaskDeleted, onTaskFinished }: NoteTaskProps)
                     <Dialog.Close className='absolute right-2 top-2 bg-stone-800 rounded-full p-1 text-stone-400 hover:text-red-400'>
                         <X size={20}/>
                     </Dialog.Close>
-                    
+
                     <div className='flex flex-1 flex-col gap-3 p-5'>
                         <div className='flex gap-4'>
+
+                            <button 
+                                type='button' 
+                                onClick={() => handleCheckChange()} 
+                                className='z-20'
+                            >
+                
+                                {task.finished ? (
+                                        <CheckCircle size={22} className='text-green-400'/>
+                                    ) : (
+                                        <Circle size={22} className='text-green-400'/>
+                                )}
+                            </button>
+                            
                             <span className='text-xl'>{task.title}</span>
                         </div>
                         <div className="h-px bg-stone-600"/>

@@ -2,11 +2,13 @@ import * as Dialog from "@radix-ui/react-dialog";
 import { CheckCircle, Circle, PlusCircle, X } from "lucide-react";
 import { ChangeEvent, FormEvent, useEffect, useState } from "react";
 import { toast } from "sonner";
+import { Task } from "./note-task";
 
 
 interface NewNoteTaskProps {
     onTaskCreated: (title: string, content: string, finished: boolean) => void
-}
+    task: Task
+}   
 
 
 
@@ -24,9 +26,24 @@ export function NewNoteTask({ onTaskCreated }: NewNoteTaskProps) {
         const storeState = localStorage.getItem('tasks')
 
         if (storeState !== null) {
-            setFinished(JSON.parse(storeState))
+            try {
+                const storedTasks = JSON.parse(storeState)
+
+                if (Array.isArray(storedTasks)) {
+
+                // need to verify if was at least one task true
+                const isAtLeastOneTaskFinished = storedTasks.some((storedTask: Task) => storedTask.finished)
+                setFinished(isAtLeastOneTaskFinished)
+
+                } else {
+                console.error('Data is incorrect')
+                }
+            } catch (error) {
+                console.error('erro to read the data', error)
+            }
         }
     }, [])
+
 
     useEffect(() => {
         localStorage.setItem('tasks', JSON.stringify(finished))
@@ -149,9 +166,9 @@ export function NewNoteTask({ onTaskCreated }: NewNoteTaskProps) {
                                     >
                         
                                         {finished ? (
-                                            <Circle size={22} className='text-green-400'/>
-                                        ) : (
                                             <CheckCircle size={22} className='text-green-400'/>
+                                            ) : (
+                                            <Circle size={22} className='text-green-400'/>
                                         )}
                                     </button>
 
