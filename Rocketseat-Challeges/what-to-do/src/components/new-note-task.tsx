@@ -7,7 +7,6 @@ import { Task } from "./note-task";
 
 interface NewNoteTaskProps {
     onTaskCreated: (title: string, content: string, finished: boolean) => void
-    task: Task
 }   
 
 

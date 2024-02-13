@@ -33,51 +33,50 @@ export function NoteTask({ task, onTaskDeleted, onTaskFinished }: NoteTaskProps)
 
         <Dialog.Root>
 
-            <Dialog.Trigger className="flex flex-row w-auto justify-between items-start
-            rounded-md bg-stone-700 py-5 px-7 h-20 relative overflow-hidden
-            hover:ring-2 hover:ring-stone-500 text-left
-            outline-none focus-visible:ring-2 focus-visible:ring-lime-500">
-                <div className="flex flex-col pb-2">
-                    <div className="flex items-start gap-8 ">
+            <div className='flex flex-row w-full justify-between items-start
+                rounded-md bg-stone-700 py-5 px-8 h-20 relative overflow-hidden
+                hover:ring-2 hover:ring-stone-500 text-left
+                outline-none focus-visible:ring-2 focus-visible:ring-lime-500'>
+                <button 
+                    type='button' 
+                    onClick={handleCheckChange} 
+                    className='z-20 relative'
+                    >
 
-                        
-                    <button 
-                        type='button' 
-                        onClick={handleCheckChange} 
-                        className='z-20'
-                        >
-        
-                        {task.finished ? (
-                                <CheckCircle size={22} className='text-green-400'/>
-                            ) : (
-                                <Circle size={22} className='text-green-400'/>
-                        )}
-                    </button>
-
-
-                        <p className="overflow-hidden absolute w-3/5 sm:w-4/5 pl-10">
-                            {task.title}
-                        </p>
-                    </div>
-
-                    <div className="h-8 overflow-hidden">
-                        <p className="text-stone-500 overflow-hidden absolute w-3/5 sm:w-4/5 pl-10 text-sm font-medium leading-6">
-                            {task.content}
-                        </p>
-                    </div>
-                </div>
-
-                <button
-                    onClick={() => onTaskDeleted(task.id)}
-                    className="text-red-500 rounded-md
-                outline-none focus-visible:ring-2 focus-visible:ring-red-400
-                hover:text-red-400 duration-75">
-                    <Trash2 />
+                    {task.finished ? (
+                            <CheckCircle size={22} className='text-green-400'/>
+                        ) : (
+                            <Circle size={22} className='text-green-400'/>
+                    )}
                 </button>
 
-                <div className="absolute bottom-0 left-0 right-0 h-1/3 bg-gradient-to-t from-black/45 to-black/0 pointer-events-none"/>
-            </Dialog.Trigger>
+                <Dialog.Trigger className="flex flex-1 flex-row text-left h-full w-full justify-between">
+                    <div className="flex flex-col w-4/5 h-full">
+                        <div className="flex items-start">
+                            <p className="overflow-hidden relative sm:w-4/5 pl-10">
+                                {task.title}
+                            </p>
+                        </div>
 
+                        <div className="h-full overflow-hidden relative">
+                            <p className="text-stone-500 relative pl-10 text-sm font-medium leading-6">
+                                {task.content}
+                            </p>
+                        </div>
+                    </div>
+
+                    <button
+                        onClick={() => onTaskDeleted(task.id)}
+                        className="text-red-500 rounded-md absolute right-8
+                    outline-none focus-visible:ring-2 focus-visible:ring-red-400
+                    hover:text-red-400 duration-75">
+                        <Trash2 />
+                    </button>
+
+                    <div className="absolute bottom-0 left-0 right-0 h-1/3 bg-gradient-to-t from-black/45 to-black/0 pointer-events-none"/>
+                </Dialog.Trigger>
+
+            </div>
 
             <Dialog.Portal>
                 <Dialog.Overlay className='inset-0 fixed bg-black/60'/> 
@@ -108,10 +107,10 @@ export function NoteTask({ task, onTaskDeleted, onTaskFinished }: NoteTaskProps)
                                 )}
                             </button>
                             
-                            <span className='text-xl'>{task.title}</span>
+                            <span className='text-xl w-3/4 overflow-hidden'>{task.title}</span>
                         </div>
                         <div className="h-px bg-stone-600"/>
-                        <span className='texstone'>{task.content}</span>
+                        <span className='texstone w-11/12 overflow-hidden'>{task.content}</span>
                     </div>
                         
 
