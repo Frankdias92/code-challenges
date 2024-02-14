@@ -99,15 +99,15 @@ export function App() {
       
       <div className="flex flex-col gap-4">
 
-        <div className="flex flex-row justify-between px-2">
-          <p className="flex items-center gap-2 text-lg text-green-500">
+        <div className="flex flex-col sm:flex-row sm:justify-between sm:px-2 gap-y-2">
+          <p className="flex items-center gap-2 text-lg justify-between text-green-500">
             Suas tarefas: 
               <span className="px-5 py-1 font-bold text-stone-200 bg-stone-700 rounded-3xl">
                 {tasks.length ? tasks.length: 0}
               </span>
           </p> 
 
-          <p className="flex items-center gap-2 text-lg text-green-500">
+          <p className="flex items-center gap-2 text-lg justify-between text-green-500">
             Concluidas: 
               <span className="px-5 py-1 font-bold text-stone-200 bg-stone-700 rounded-3xl">
                 {tasks.filter(task => task.finished).length} de {tasks.length}
@@ -130,7 +130,7 @@ export function App() {
                 )
               })
             ) : (
-              <div className="absolute flex flex-col translate-x-1/2">
+              <div className="relative flex flex-col self-center">
                   <img src={Clipboard} className="size-14 flex self-center" />
                 <div className="flex flex-col my-4">
                   <p className="font-bold text-stone-400">Você ainda não tem tarefas cadastradas</p>
