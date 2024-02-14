@@ -262,6 +262,6 @@ Accessibility and Usability:
 
 ## Preview
 
-[Live](https://do-what-1o1gvqe2f-frankdias92s-projects.vercel.app/)
+[Live](https://do-what-dxulaskua-frankdias92s-projects.vercel.app/)
 
 ![Captura de tela da aplicação](./public/capa-doWhat.png)
