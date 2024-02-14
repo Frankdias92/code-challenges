@@ -34,13 +34,13 @@ export function NoteTask({ task, onTaskDeleted, onTaskFinished }: NoteTaskProps)
         <Dialog.Root>
 
             <div className='flex flex-row w-full justify-between items-start
-                rounded-md bg-stone-700 py-5 px-8 h-20 relative overflow-hidden
-                hover:ring-2 hover:ring-stone-500 text-left
-                outline-none focus-visible:ring-2 focus-visible:ring-lime-500'>
+                rounded-md bg-stone-700 h-20 relative overflow-hidden
+                hover:ring-2 hover:ring-stone-500 text-left p-2
+                '>
                 <button 
                     type='button' 
                     onClick={handleCheckChange} 
-                    className='z-20 relative'
+                    className='z-20 absolute left-8 top-4 rounded-full outline-none focus-visible:ring-2 focus-visible:ring-lime-500'
                     >
 
                     {task.finished ? (
@@ -50,24 +50,23 @@ export function NoteTask({ task, onTaskDeleted, onTaskFinished }: NoteTaskProps)
                     )}
                 </button>
 
-                <Dialog.Trigger className="flex flex-1 flex-row text-left h-full w-full justify-between">
-                    <div className="flex flex-col w-4/5 h-full">
-                        <div className="flex items-start">
-                            <p className="overflow-hidden relative sm:w-4/5 pl-10">
+                <Dialog.Trigger className="flex flex-1 flex-row text-left h-full w-full justify-between
+                rounded-md outline-none focus-visible:ring-2 focus-visible:ring-lime-500
+                ">
+                    <div className="flex flex-col w-[90%] h-full pl-14">
+                            <p className="flex overflow-hidden text-2xl h-16 relative sm:w-4/5">
                                 {task.title}
                             </p>
-                        </div>
 
-                        <div className="h-full overflow-hidden relative">
-                            <p className="text-stone-500 relative pl-10 text-sm font-medium leading-6">
+                            <p className="text-stone-500 flex flex-col w-full overflow-hidden 
+                            pt-1 text-sm font-medium leading-4 break-words h-full mb-1">
                                 {task.content}
                             </p>
-                        </div>
                     </div>
 
                     <button
                         onClick={() => onTaskDeleted(task.id)}
-                        className="text-red-500 rounded-md absolute right-8
+                        className="text-red-500 rounded-md absolute right-8 top-4
                     outline-none focus-visible:ring-2 focus-visible:ring-red-400
                     hover:text-red-400 duration-75">
                         <Trash2 />

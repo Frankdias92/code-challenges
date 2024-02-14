@@ -157,33 +157,40 @@ export function NewNoteTask({ onTaskCreated }: NewNoteTaskProps) {
                             
                             <p className="text-sm leading-6 text-stone-400">Comece <button onClick={handleStartRecording} className="font-medium text-green-500 hover:underline">gravando uma tarefa</button> em áudio ou se preferir <button onClick={handleStartEditor} className="font-medium text-green-500 hover:underline">utilize apenas texto</button>.</p>
                             ) : (
-                                <div className="flex flex-col space-y-4">
-                                    <button 
-                                        type='button' 
-                                        onClick={() => handleFinishedTaskChange()} 
-                                        className='z-20'
-                                    >
-                        
-                                        {finished ? (
-                                            <CheckCircle size={22} className='text-green-400'/>
-                                            ) : (
-                                            <Circle size={22} className='text-green-400'/>
-                                        )}
-                                    </button>
+                                <div className="flex flex-col space-y-4 h-full">
+                                    <div className="flex flex-row w-full space-x-4">
+                                        <button 
+                                            type='button' 
+                                            onClick={() => handleFinishedTaskChange()} 
+                                            className='z-20'
+                                        >
+                            
+                                            {finished ? (
+                                                <CheckCircle size={22} className='text-green-400'/>
+                                                ) : (
+                                                <Circle size={22} className='text-green-400'/>
+                                            )}
+                                        </button>
 
-                                    <input 
-                                        autoFocus
-                                        type="text" 
-                                        placeholder="Defina sua task"
-                                        onChange={handleTitleChange}
-                                        value={title}
-                                        className="bg-black/5 rounded-md p-4 outline-none focus-visible:ring-2 focus-visible:ring-lime-500"
-                                    />
-                                    <textarea 
-                                        className="text-sm leading-6 text-stone-400 bg-black/5 resize-y flex-1 rounded-md outline-none focus-visible:ring-2 focus-visible:ring-lime-500"
-                                        onChange={handleContentTextChange}
-                                        value={content}
-                                    />
+                                        <input 
+                                            autoFocus
+                                            type="text" 
+                                            placeholder="Defina sua task"
+                                            onChange={handleTitleChange}
+                                            value={title}
+                                            className="bg-black/5 w-full rounded-md p-4 outline-none
+                                            focus-visible:ring-2 focus-visible:ring-lime-500"
+                                        />
+                                    </div>
+
+                                    <div className="flex w-full  h-1/3">
+                                        <textarea 
+                                            className="text-sm leading-6 text-stone-400 bg-black/5 flex-1 p-4 rounded-md
+                                            outline-none focus-visible:ring-2 focus-visible:ring-lime-500 resize-none overflow-hidden"
+                                            onChange={handleContentTextChange}
+                                            value={content}
+                                        />
+                                    </div>
                                 </div>
                             )}
 
