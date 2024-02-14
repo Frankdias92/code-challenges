@@ -1,7 +1,7 @@
 import { ChangeEvent, useState } from "react";
 import { NewNoteTask } from "./components/new-note-task";
 import { NoteTask } from "./components/note-task";
-
+import Clipboard from './assets/Clipboard.svg'
 
 interface Task {
   id: string
@@ -99,34 +99,47 @@ export function App() {
       
       <div className="flex flex-col gap-4">
 
-    <div className="flex flex-row justify-between px-2">
-      <p className="flex items-center gap-2 text-lg">
-        Suas tarefas: 
-          <span className="px-5 py-1 font-bold bg-stone-700 rounded-3xl">
-            {tasks.length ? tasks.length: 0}
-          </span>
-      </p> 
+        <div className="flex flex-row justify-between px-2">
+          <p className="flex items-center gap-2 text-lg text-green-500">
+            Suas tarefas: 
+              <span className="px-5 py-1 font-bold text-stone-200 bg-stone-700 rounded-3xl">
+                {tasks.length ? tasks.length: 0}
+              </span>
+          </p> 
 
-      <p className="flex items-center gap-2 text-lg">
-        Concluidas: 
-          <span className="px-5 py-1 font-bold bg-stone-700 rounded-3xl">
-            {tasks.filter(task => task.finished).length}
-          </span></p>
-    </div>
+          <p className="flex items-center gap-2 text-lg text-green-500">
+            Concluidas: 
+              <span className="px-5 py-1 font-bold text-stone-200 bg-stone-700 rounded-3xl">
+                {tasks.filter(task => task.finished).length} de {tasks.length}
+              </span>
+          </p>
+        </div>
 
-      <div className="h-px bg-stone-700"/>
 
-        {Array.isArray(filteredTasks) && filteredTasks.map((task) => {
-          return (
-            <NoteTask 
-              key={task.id}
-              task={task}
-              onTaskDeleted={onTaskDeleted} 
-              onTaskFinished={(id, finished) => onTaskFinished(id, finished)}
-            />
-          )
-        })}
-        
+        <div className="flex flex-1 w-full flex-col py-16 rounded-md h-full gap-4 border-t-2 border-t-stone-700">
+
+            {filteredTasks.length > 0 ? (
+                Array.isArray(filteredTasks) && filteredTasks.map((task) => {
+                return (
+                      <NoteTask 
+                      key={task.id}
+                      task={task}
+                      onTaskDeleted={onTaskDeleted} 
+                      onTaskFinished={(id, finished) => onTaskFinished(id, finished)}
+                    />
+                )
+              })
+            ) : (
+              <div className="absolute flex flex-col translate-x-1/2">
+                  <img src={Clipboard} className="size-14 flex self-center" />
+                <div className="flex flex-col my-4">
+                  <p className="font-bold text-stone-400">Você ainda não tem tarefas cadastradas</p>
+                  <p className="text-stone-500">Crie tarefas e organize seus itens a fazer</p>
+                </div>
+              </div>
+            )
+          }
+        </div>
       </div>
     </section>
   )

@@ -34,7 +34,7 @@ export function NoteTask({ task, onTaskDeleted, onTaskFinished }: NoteTaskProps)
         <Dialog.Root>
 
             <div className='flex flex-row w-full justify-between items-start
-                rounded-md bg-stone-700 h-20 relative overflow-hidden
+                rounded-md bg-stone-700 h-20 relative overflow-hidden ring-2 ring-stone-700
                 hover:ring-2 hover:ring-stone-500 text-left p-2
                 '>
                 <button 
