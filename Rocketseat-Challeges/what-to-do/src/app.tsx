@@ -99,8 +99,22 @@ export function App() {
       
       <div className="flex flex-col gap-4">
 
+    <div className="flex flex-row justify-between px-2">
+      <p className="flex items-center gap-2 text-lg">
+        Suas tarefas: 
+          <span className="px-5 py-1 font-bold bg-stone-700 rounded-3xl">
+            {tasks.length ? tasks.length: 0}
+          </span>
+      </p> 
 
-        <div className="h-px bg-stone-700"/>
+      <p className="flex items-center gap-2 text-lg">
+        Concluidas: 
+          <span className="px-5 py-1 font-bold bg-stone-700 rounded-3xl">
+            {tasks.filter(task => task.finished).length}
+          </span></p>
+    </div>
+
+      <div className="h-px bg-stone-700"/>
 
         {Array.isArray(filteredTasks) && filteredTasks.map((task) => {
           return (
