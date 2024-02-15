@@ -40,7 +40,7 @@ export function NoteTask({ task, onTaskDeleted, onTaskFinished }: NoteTaskProps)
                 <button 
                     type='button' 
                     onClick={handleCheckChange} 
-                    className='z-20 absolute left-8 top-4 rounded-full outline-none focus-visible:ring-2 focus-visible:ring-lime-500'
+                    className='z-5 absolute left-8 top-4 rounded-full outline-none focus-visible:ring-2 focus-visible:ring-lime-500'
                     >
 
                     {task.finished ? (

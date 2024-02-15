@@ -2,6 +2,7 @@ import { ChangeEvent, useState } from "react";
 import { NewNoteTask } from "./components/new-note-task";
 import { NoteTask } from "./components/note-task";
 import Clipboard from './assets/Clipboard.svg'
+import { Footer } from "./components/footer";
 
 interface Task {
   id: string
@@ -80,7 +81,7 @@ export function App() {
   
 
   return (
-    <section className="m-auto max-w-6xl gap-y-4 flex flex-col md:w-[732px] px-5 md:px-0">
+    <section className="m-auto max-w-6xl gap-y-4 flex flex-col md:w-[732px] h-screen px-5 md:px-0">
 
       <div className="flex sm:flex-row mx-auto items-center -translate-y-1/2
       gap-4">
