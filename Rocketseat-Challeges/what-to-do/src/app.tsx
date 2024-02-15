@@ -2,7 +2,7 @@ import { ChangeEvent, useState } from "react";
 import { NewNoteTask } from "./components/new-note-task";
 import { NoteTask } from "./components/note-task";
 import Clipboard from './assets/Clipboard.svg'
-import { Footer } from "./components/footer";
+
 
 interface Task {
   id: string

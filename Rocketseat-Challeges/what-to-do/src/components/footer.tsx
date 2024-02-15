@@ -2,7 +2,7 @@ import git from '../assets/github.svg'
 
 
 
-export default function Footer() {
+export function Footer() {
 
 
     return (
