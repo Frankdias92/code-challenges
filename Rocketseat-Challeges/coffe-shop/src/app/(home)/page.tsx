@@ -1,7 +1,9 @@
 import { TheBestOnCountry } from "@/components/TheBestOnCountry";
 import { FeaturedProduct } from "@/components/featured";
+import { Footer } from "@/components/footer";
 import { Header } from "@/components/header";
 import HomeMain from "@/components/homeMain";
+import { SectionProducts } from "@/components/sectionProducts";
 
 export default function Home() {
   return (
@@ -10,6 +12,8 @@ export default function Home() {
       <HomeMain />
       <FeaturedProduct />
       <TheBestOnCountry />
+      <SectionProducts />
+      <Footer />
     </div>
   )
 }

@@ -19,7 +19,7 @@ export function TheBestOnCountry() {
 
                     <div className="text-white w-full lg:w-2/5">
                         <div className="flex flex-col gap-y-8 sm:pl-10 pt-10">
-                            <h2 className="leading-relaxed sm:leading-6 text-3xl font-bold">O MELHOR CAFÉ DA CIDADE!</h2>
+                            <h2 className="leading-relaxed text-3xl font-bold">O MELHOR CAFÉ DA CIDADE!</h2>
 
                             <p className="text-base font-bold">ENTREGA MAIS RAPIDA DA REGIÃO</p>
                             <p className="text-base font-bold">PEDIDOS AUTOMATIZADOS</p>
