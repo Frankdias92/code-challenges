@@ -17,7 +17,7 @@ export function SectionProducts() {
                 <div className="flex flex-col items-center w-[256px] h-[310px] bg-dark-orange  rounded-xl rounded-tr-[36px] rounded-bl-[36px] pt-[70px] relative">
                     <div className="w-[200px] h-[155px] absolute self-center top-0 -translate-y-[45%]">
                         <Image src={coffe} alt="" width={640} height={496}
-                            className=''
+                            className='hover:scale-105 transition-transform duration-500'
                         />
                     </div>
                     
@@ -32,8 +32,8 @@ export function SectionProducts() {
                         </h3>
 
                         <div className='flex justify-center h-[80px] relative overflow-hidden'>
-                            <p className='font-poppins text-sm'>
-                                O tradicional café feito com água quente e grãos moídos
+                            <p className='text-wrap font-poppins text-sm'>
+                            O tradicional café feito com água quente e grãos moídos
                             </p>
                         </div>
 
