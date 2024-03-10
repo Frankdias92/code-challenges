@@ -21,11 +21,11 @@ export default async function Page({ params }: { params: { id: string } }) {
 
     
   return (
-    <div>
-      <pre>{params.id}</pre>
-
-
+    <div className="flex flex-col h-full justify-between">
+      <div className="flex flex-row m-auto justify-between w-3/4">
         <GetProductId id={params.id as string}/>
+        
+      </div>
     </div>
   );
 }

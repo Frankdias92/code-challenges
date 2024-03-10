@@ -6,7 +6,7 @@ import Image from "next/image";
 export function Header() {
 
     return (
-        <header className="flex justify-center items-center w-full h-[104px]">
+        <header className="flex absolute justify-center items-center w-full h-[104px]">
             <ul className="flex w-3/4 justify-between">
                 <li>
                     <LogoHeadIcon />

@@ -1,6 +1,8 @@
 import type { Metadata } from "next";
 import { Baloo_2, Poppins } from "next/font/google";
 import "./globals.css";
+import { Header } from "@/components/header";
+import { Footer } from "@/components/footer";
 
 const baloo = Baloo_2({ subsets: ["latin"] });
 const poppins = Poppins({ subsets: ["latin"], weight: ["400"] });
@@ -17,7 +19,13 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className={baloo.className}>{children}</body>
+      <body className={baloo.className} >
+        <Header />
+        <section className="flex flex-col w-full h-dvh justify-between relative pt-[104px]">
+          {children}
+        </section>
+        <Footer />
+      </body>
     </html>
   );
 }
