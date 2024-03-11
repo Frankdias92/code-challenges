@@ -1,23 +1,54 @@
 'use server'
 
+
+import BtnBuyProduct from "@/components/btnBuyProduct"
 import { CardWhiteIcon, HandDeslike, HandLike } from "@/components/icons/icons"
 import { stripe } from "@/lib/stripe"
+import axios from "axios"
 import Image from "next/image"
+import Stripe from "stripe"
 
 
 interface ProductProps {
-    id: string
+    productId: string
 }
 
 
-export async function GetProductId({id}: ProductProps) {
-
-    console.log('test server')
+export async function GetProductId({productId}: ProductProps) {
     
-    const response = await stripe.products.retrieve(id)
-    // const product = JSON.stringify(response)
-    const product = response
+    
+    const response = await stripe.products.retrieve(productId, {
+        expand: ['default_price']
+    })
 
+    const product = response
+    
+    const priceId = product.default_price as Stripe.Price
+    
+
+    // console.log('produto Id:', product.id)
+    // console.log('price Id:', priceId.id)
+
+
+
+    async function handleBuyProduct() {
+        
+        try {
+            const response = await axios.post('/api/checkout', {
+                priceId: priceId.id, 
+            })
+            
+            const { checkoutUrl } = response.data
+            
+            window.location.href = checkoutUrl
+            
+        } catch (err) {
+            alert('Error ao rederecionar para a pagina de compra!')
+            console.log(`test erro: ${err}`)
+        }
+    }
+    
+    
     
     return (
         <section className="flex w-full h-full flex-col py-20 justify-between">
@@ -47,10 +78,9 @@ export async function GetProductId({id}: ProductProps) {
                             </span>
                         </div>
 
-                        <button className="flex justify-center items-center w-[180px] py-2 bg-darkModerateYello text-pale font-semibold
-                            translate-y-4">
-                            Fazer pedido
-                        </button>
+                        <BtnBuyProduct  price={priceId.id} product={product.id}/>
+
+
                     </div>
                 </div>
 

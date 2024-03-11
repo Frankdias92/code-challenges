@@ -11,10 +11,10 @@ export function Footer() {
                     <LogoFooterIcon />
                     <ul className="flex flex-col lg:flex-row items-end lg:items-center lg:col-span-4 justify-center w-full gap-x-4
                         font-bold lg:text-3xl ">
-                        <li className="flex flex-row-reverse gap-4 items-center text-white"><div className="size-1 lg:size-2 bg-yellow-400 rounded-full"/>INICION</li>
-                        <li className="flex flex-row-reverse gap-4 items-center text-white"><div className="size-1 lg:size-2 bg-yellow-400 rounded-full"/>CONTATO</li>
-                        <li className="flex flex-row-reverse gap-4 items-center text-white"><div className="size-1 lg:size-2 bg-yellow-400 rounded-full"/>LOCALIZAÇÃO</li>
-                        <li className="flex flex-row-reverse gap-4 items-center text-white"><div className="size-1 lg:size-2 bg-yellow-400 rounded-full"/>MENU</li>
+                        <li className="flex flex-row-reverse lg:flex-row gap-4 items-center text-white"><div className="size-1 lg:size-2 bg-yellow-400 rounded-full"/>INICIO</li>
+                        <li className="flex flex-row-reverse lg:flex-row gap-4 items-center text-white"><div className="size-1 lg:size-2 bg-yellow-400 rounded-full"/>CONTATO</li>
+                        <li className="flex flex-row-reverse lg:flex-row gap-4 items-center text-white"><div className="size-1 lg:size-2 bg-yellow-400 rounded-full"/>LOCALIZAÇÃO</li>
+                        <li className="flex flex-row-reverse lg:flex-row gap-4 items-center text-white"><div className="size-1 lg:size-2 bg-yellow-400 rounded-full"/>MENU</li>
                     </ul>
                 </div>
                 <div className="bg-pale-yellow h-[0.5px] w-full mt-10"/>

@@ -7,7 +7,7 @@ import { SectionProducts } from "@/components/sectionProducts";
 
 export default function Home() {
   return (
-    <div className="flex flex-col w-full h-full bg-yellow-400">
+    <div className="flex flex-col w-full relative bg-pure-yellow">
       <HomeMain />
       <FeaturedProduct />
       <TheBestOnCountry />

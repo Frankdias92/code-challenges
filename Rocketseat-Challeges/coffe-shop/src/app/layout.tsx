@@ -21,7 +21,7 @@ export default function RootLayout({
     <html lang="en">
       <body className={baloo.className} >
         <Header />
-        <section className="flex flex-col w-full h-dvh justify-between relative pt-[104px]">
+        <section className="flex flex-col w-full h-max justify-between relative pt-[104px]">
           {children}
         </section>
         <Footer />
