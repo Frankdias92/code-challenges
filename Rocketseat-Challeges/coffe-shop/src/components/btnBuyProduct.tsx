@@ -20,14 +20,12 @@ export default function BtnBuyProduct({ priceId }: BtnBuyProductProps) {
             {
                 data: priceId
             })
-            
-            console.log('teste btn: ', response)
-
             const data = await response.data
-
+            
+            
+            console.log('send from buyProduct: ', data.data)
             window.location.href = data.checkoutUrl
 
-            console.log('TESTE BTN: ', data)
         } catch (err) {
           alert('Erro ao redirecionar');
         } finally {

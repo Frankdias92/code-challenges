@@ -20,12 +20,8 @@ export default async function Page({ params }: { params: {id: string}}) {
   
   const productId = res
   const priceId = res.default_price as Stripe.Price
-  
-  
-  // console.log('###########################', priceId)
 
-
-  // console.log('GET PRICE priceId: ', priceId)
+    // console.log('PAGE: ', priceId)
 
 
   
@@ -61,7 +57,7 @@ export default async function Page({ params }: { params: {id: string}}) {
                             </span>
                         </div>
 
-                        <BtnBuyProduct priceId={String(priceId.id)}  />
+                        <BtnBuyProduct priceId={priceId.id}  />
                     
 
 

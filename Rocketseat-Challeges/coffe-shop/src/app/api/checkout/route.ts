@@ -14,9 +14,8 @@ export async function GET(req: Request) {
 
 export async function POST(req: Request) {
     // try {
-        const {data}  = await req.json()
-        console.log('REQUEST : ', data);
-        const priceId = data.data
+        const { data } = await req.json()
+        const priceId = data
 
 
         const successUrl = `${process.env.NEXT_URL}/success`;
