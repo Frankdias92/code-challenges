@@ -1,45 +1,51 @@
 'use client'
 
-import { buyProduct } from '@/lib/buyProduct';
+import axios from 'axios';
 import { useState } from 'react';
 
+
 interface BtnBuyProductProps {
-  price: string;
-  product: string;
+    priceId: string
 }
 
-export function BtnBuyProduct({ price, product }: BtnBuyProductProps) {
-  const [loading, setLoading] = useState(false);
-  // console.log('price: ', price)
+export default function BtnBuyProduct({ priceId }: BtnBuyProductProps) {
+    const [loading, setLoading] = useState(false);
+    
 
-  const handleBuyProduct = async () => {
-    setLoading(true);
+    // console.log('recebendo price: ', priceId)
+    async function handleBuyProduct() {
+        setLoading(true);
+        try {
+            const response = await axios.post(`/api/checkout`,
+            {
+                data: priceId
+            })
+            
+            console.log('teste btn: ', response)
 
-    try {
-      const checkoutUrl = await buyProduct(price, product);
-      
-      // console.log('CHECK: ', checkoutUrl)
+            const data = await response.data
 
-      window.location.href = checkoutUrl;
-    } catch (error) {
-      alert(error);
+            window.location.href = data.checkoutUrl
 
-    } finally {
-      setLoading(false);
+            console.log('TESTE BTN: ', data)
+        } catch (err) {
+          alert('Erro ao redirecionar');
+        } finally {
+          setLoading(false);
+        }
     }
-  };
-
-
-
+    
   return (
-    <button
-      onClick={handleBuyProduct}
-      disabled={loading}
-      className="flex justify-center items-center w-[180px] py-2 bg-darkModerateYello text-pale font-semibold translate-y-4"
-    >
-      {loading ? 'Carregando...' : 'Fazer pedido'}
-    </button>
-  );
-};
 
-export default BtnBuyProduct;
+        <button
+            onClick={handleBuyProduct}
+              disabled={loading}
+            className="flex justify-center items-center w-[180px] py-2 bg-darkModerateYello text-pale font-semibold translate-y-4"
+        >
+            {loading ? 'Carregando...' : 'Fazer pedido'}
+            Fazer Pedido
+        </button>
+
+  )
+}
+

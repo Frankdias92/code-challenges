@@ -53,23 +53,30 @@ export async function listProducts() {
         expand: ['data.default_price']
     })
 
-    console.log('test server', response)
+    let formattedPrice = 'indisponivel'
+    // console.log('test server', response)
 
     const products = response.data.map(product => {
-        const price = product.default_price as Stripe.Price
-
+        const price = product.default_price as Stripe.Price;
+    
+        let formattedPrice = 'indisponivel'; // Valor padrão se o preço não estiver disponível
+    
+        if (price && price.unit_amount !== null) {
+            formattedPrice = new Intl.NumberFormat('pt-BR', {
+                style: 'currency',
+                currency: 'BRL',
+            }).format(price.unit_amount / 100);
+        }
+    
         return {
             id: product.id,
             name: product.name,
             description: product.description,
             imageUrl: product.images[0],
             url: product.url,
-            price: new Intl.NumberFormat('pt-BR', {
-                style: 'currency',
-                currency: 'BRL',
-            }).format(price.unit_amount / 100)
-        }
-    })
+            price: formattedPrice
+        };
+    });
 
     return { products }
 }

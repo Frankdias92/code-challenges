@@ -4,9 +4,6 @@ const nextConfig = {
     images: {
         domains: ['github.com', 'files.stripe.com'],
     },
-    experimental: {
-        clientRouterFilter: false,
-    }
 
 };
 

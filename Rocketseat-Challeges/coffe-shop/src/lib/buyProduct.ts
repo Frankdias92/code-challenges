@@ -1,24 +1,34 @@
-'use server'
+// 'use client'
 
-import axios  from 'axios';
+// require('dotenv').config()
 
-export async function buyProduct(price: string, product: string) {
+// export async function buyProduct(params: string) {
 
-  // console.log('servidor price: ', price)
+//   // try {
+//     const response = await axios.post(`${process.env.NEXT_URL}/api/checkout`, {
+//                 priceId: productId.id,
+//             })
 
+//             const { checkoutUrl } = response.data
 
-  try {
+//             window.location.href = checkoutUrl
+
+//     // return Response.json({ params: response.json })
     
-    const response = await axios.post(`http://localhost:3000/api/checkout`, { price: product });
+//     if (!response.ok) {
+//       throw new Error('Erro na solicitação');
+//     }
     
-    console.log('CHECK: ', response.data  )
-    const { checkoutUrl } = response.data;
-   
-   
-    return checkoutUrl;
-
-  } catch (err) {
-    console.error(err);
-    throw new Error('Erro ao redirecionar para a página de compra!');
-  }
-}
+//     const data = await response.json();
+//     const { checkoutUrl } = data;
+    
+//     console.log('BUY PRODUCT: ', data)
+//     return checkoutUrl;
+    
+//   // } catch (error) {
+//   //   console.error('Erro na solicitação:', error);
+//   //   throw new Error('Erro na solicitação');
+//   // }
+  
+//   // return Response.json({ priceId : response.json })
+// }

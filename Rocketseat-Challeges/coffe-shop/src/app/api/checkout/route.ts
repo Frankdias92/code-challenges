@@ -1,34 +1,46 @@
 'use server'
+
 require('dotenv').config()
 
-import { stripe } from "@/lib/stripe";
-// import { NextApiRequest, NextApiResponse } from "next";
+import { stripe } from '@/lib/stripe';
+import { NextResponse } from 'next/server';
 
 
-export async function POST(request: Response) {
-    
-    const priceId = 'price_1OmjLDAs0n97V7scIbvwRoeQ'
 
-    const successUrl = `${process.env.NEXT_URL}/success`
-    const cancelUrl =  `${process.env.NEXT_URL}/`
+export async function GET(req: Request) {
 
-    try {
-        const checkoutSession = await stripe.checkout.sessions.create({
-            success_url: successUrl,
-            cancel_url: cancelUrl,
+    return NextResponse.json({ message: 'priceId' })
+}
+
+export async function POST(req: Request) {
+    // try {
+        const {data}  = await req.json()
+        console.log('REQUEST : ', data);
+        const priceId = data.data
+
+
+        const successUrl = `${process.env.NEXT_URL}/success`;
+        const cancelUrl = `${process.env.NEXT_URL}/`;
+
+
+        const create = await stripe.checkout.sessions.create({
             payment_method_types: ['card'],
             line_items: [
                 {
                     price: priceId,
-                    quantity: 1,
+                    quantity: 1,    
                 }
             ],
             mode: 'payment',
-        })
+            success_url: successUrl,
+            cancel_url: cancelUrl,
+        });
 
-        return Response.json({ checkoutUrl: checkoutSession.url });
-        
-    } catch (error) {
-        return Response.json({ error: 'Erro ao criar a sessão de checkout!' });
-    }
+        console.log('Create session response:', create);
+
+        return NextResponse.json({ checkoutUrl: create.url });
+    // } catch (error) {
+    //     console.error('Erro ao criar a sessão de checkout:', error);
+    //     return NextResponse.json({ error: 'Erro ao criar a sessão de checkout' });
+    // }
 }
