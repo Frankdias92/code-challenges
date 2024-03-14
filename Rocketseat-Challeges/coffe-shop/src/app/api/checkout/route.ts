@@ -18,7 +18,7 @@ export async function POST(req: Request) {
         const priceId = data
 
 
-        const successUrl = `${process.env.NEXT_URL}/success`;
+        const successUrl = `${process.env.NEXT_URL}/success?session_id={CHECKOUT_SESSION_ID}`;
         const cancelUrl = `${process.env.NEXT_URL}/`;
 
 
@@ -35,7 +35,7 @@ export async function POST(req: Request) {
             cancel_url: cancelUrl,
         });
 
-        console.log('Create session response:', create);
+        // console.log('Create session response:', create);
 
         return NextResponse.json({ checkoutUrl: create.url });
     // } catch (error) {
