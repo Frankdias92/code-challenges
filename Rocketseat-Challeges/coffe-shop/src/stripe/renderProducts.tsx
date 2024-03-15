@@ -49,7 +49,7 @@ export async function RenderProducts() {
 
 export async function listProducts() {
     const response = await stripe.products.list({
-        limit: 1,
+        limit: 14,
         expand: ['data.default_price']
     })
 
