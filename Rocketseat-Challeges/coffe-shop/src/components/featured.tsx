@@ -1,7 +1,4 @@
-import Image from "next/image";
-import { ArrowIcon, StarsIcon } from "./icons/icons";
-import frameCafe from '../assets/imgs/Cafe Frame.png'
-import Link from "next/link";
+
 import { RenderProducts } from "@/stripe/renderProducts";
 
 

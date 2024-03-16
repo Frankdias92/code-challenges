@@ -11,11 +11,12 @@ import Stripe from "stripe"
 
 export async function RenderProducts() {
     const { products } = await listProducts()
+    const FeaturedProduct = products.slice(0, 3)
     
     
     return (
-        <div className="flex flex-row">
-            {products.map(product => (
+        <div className="flex lg:flex-row flex-col ">
+            {FeaturedProduct.map(product => (
                 <Link key={product.id} href={`/product/${product.id}`} className="flex flex-col items-center gap-y-2">
                 <div className="flex flex-1 w-[320px] h-[230px] bg-cover">
                     <Image src={product.imageUrl} alt="" width={370} height={230} quality={100}
@@ -33,7 +34,7 @@ export async function RenderProducts() {
                             {product.price} 
                         </p>
                         <div className="flex flex-row space-x-2">
-                            <span className="text-lg font-extrabold text-red-600">ADICIONAR</span>
+                            <span className="text-lg font-extrabold text-red-600 hover:underline">ADICIONAR</span>
                             <span className="flex items-center">
                                 <ArrowIcon />
                             </span>

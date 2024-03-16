@@ -4,6 +4,9 @@ import "./globals.css";
 import { Header } from "@/components/header";
 import { Footer } from "@/components/footer";
 
+
+
+
 const baloo = Baloo_2({ subsets: ["latin"] });
 const poppins = Poppins({ subsets: ["latin"], weight: ["400"] });
 
