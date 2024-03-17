@@ -3,6 +3,7 @@ import Image from 'next/image'
 import { CardWhiteIcon } from './icons/icons'
 import { listProducts } from '@/stripe/renderProducts'
 import Link from 'next/link'
+import SplashCoffee from '../assets/imgs/splash-coffee.png'
 
 
 
@@ -13,11 +14,11 @@ export async function SectionProducts() {
 
 
     return (
-        <div className="flex justify-center w-full bg-pale py-20 overflow-hidden">
+        <div className="flex justify-center w-full bg-pale-yellow py-20 overflow-hidden">
         <div className="w-3/4 ">
 
             <div className="flex flex-col w-full text-pale-yellow gap-y-4">
-                <h2 className='text-black font-bold text-3xl'>Nossos cafés</h2>
+                <h2 className='text-black font-bold text-3xl'>Nossos Menu</h2>
 
                         <section className='grid w-full h-[420px] grid-flow-col m-auto items-end
                             overflow-x-scroll overflow-hidden
@@ -27,10 +28,14 @@ export async function SectionProducts() {
                             
                                 {products.map(product => {
                                     return (
-                                            <div key={product.id} className="flex flex-col items-center w-[256px] h-[310px] bg-dark-orange  rounded-xl rounded-tr-[36px] rounded-bl-[36px] pt-[70px] relative">
-                                                <div className="w-[200px] h-[155px] absolute self-center top-0 -translate-y-[45%]">
+                                            <div key={product.id} className="flex flex-col items-center w-[256px] h-[310px] bg-dark-orange  rounded-xl rounded-tr-[36px] rounded-bl-[36px] pt-[70px] relative drop-shadow">
+                                                <div className="w-[200px] h-[155px] absolute self-center top-0 -translate-y-[45%] group">
+                                                    <Image src={SplashCoffee} alt="" width={640} height={496} quality={100}
+                                                        className='group-hover:opacity-100 opacity-0 transition-all  duration-300
+                                                        absolute top-5 translate-x-5 z-10 scale-90 group-hover:scale-110 group-hover:-rotate-6 group-hover:-translate-y-2'
+                                                    />
                                                     <Image src={product.imageUrl} alt="" width={640} height={496} quality={100}
-                                                        className='hover:scale-105 transition-transform duration-500'
+                                                        className='group-hover:scale-105 transition-transform duration-500 absolute z-20 group-hover:-translate-x-5 group-hover:-translate-y-2 group-hover:-rotate-[25deg]'
                                                     />
                                                 </div>
                                                 

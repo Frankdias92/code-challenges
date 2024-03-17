@@ -26,7 +26,7 @@ export default async function Page({ params }: { params: {id: string}}) {
 
   
   return (
-    <div className="flex flex-col h-max justify-between">
+    <div className="flex flex-col h-max justify-between bg-pale-yellow">
       <div className="flex flex-row m-auto justify-between w-3/4">
         
 
@@ -65,7 +65,7 @@ export default async function Page({ params }: { params: {id: string}}) {
                 </div>
 
                 <div className="flex col-span-2 justify-self-center items-center w-[400px] h-[600px] bg-contain">
-                    <Image src={productId.images[0]} alt="" width={370} height={230}
+                    <Image src={productId.images[0]} alt="" width={800} height={1200} quality={100}
                         className="flex w-[370px] h-[230px] scale-[180%]"
                     />
                 </div>

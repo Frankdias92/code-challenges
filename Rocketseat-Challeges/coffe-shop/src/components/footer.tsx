@@ -12,10 +12,10 @@ export function Footer() {
                     <LogoFooterIcon />
                     <ul className="flex flex-col lg:flex-row items-end lg:items-center lg:col-span-4 justify-center w-full gap-x-4
                         font-bold lg:text-3xl">
-                        <Link href={'/'} className="flex flex-row-reverse lg:flex-row gap-4 items-center text-white  hover:underline"><div className="size-1 lg:size-2 bg-yellow-400 rounded-full"/>INICIO</Link>
-                        <Link href={''} className="flex flex-row-reverse lg:flex-row gap-4 items-center text-white  hover:underline"><div className="size-1 lg:size-2 bg-yellow-400 rounded-full"/>CONTATO</Link>
-                        <Link href={''} className="flex flex-row-reverse lg:flex-row gap-4 items-center text-white  hover:underline"><div className="size-1 lg:size-2 bg-yellow-400 rounded-full"/>LOCALIZAÇÃO</Link>
-                        <Link href={'/shop'} className="flex flex-row-reverse lg:flex-row gap-4 items-center text-white  hover:underline"><div className="size-1 lg:size-2 bg-yellow-400 rounded-full"/>SHOP</Link>
+                        <Link href={'/'} className="flex flex-row-reverse lg:flex-row gap-4 items-center text-white  hover:underline decoration-4 underline-offset-8 decoration-pure-yellow"><div className="size-1 lg:size-2 bg-yellow-400 rounded-full"/>INICIO</Link>
+                        <Link href={'/about'} className="flex flex-row-reverse lg:flex-row gap-4 items-center text-white  hover:underline decoration-4 underline-offset-8 decoration-pure-yellow"><div className="size-1 lg:size-2 bg-yellow-400 rounded-full"/>SOBRE</Link>
+                        <Link href={'/contact'} className="flex flex-row-reverse lg:flex-row gap-4 items-center text-white  hover:underline decoration-4 underline-offset-8 decoration-pure-yellow"><div className="size-1 lg:size-2 bg-yellow-400 rounded-full"/>CONTATO</Link>
+                        <Link href={'/shop'} className="flex flex-row-reverse lg:flex-row gap-4 items-center text-white  hover:underline decoration-4 underline-offset-8 decoration-pure-yellow"><div className="size-1 lg:size-2 bg-yellow-400 rounded-full"/>SHOP</Link>
                     </ul>
                 </div>
                 <div className="bg-pale-yellow h-[0.5px] w-full mt-10"/>

@@ -14,11 +14,13 @@ export async function ShopProducts() {
             <div className="grid grid-cols-4 m-auto gap-8">
                 {products.map(product => (
                     <Link key={product.id} href={`/product/${product.id}`} className="flex flex-col items-center gap-y-2">
-                    <div className="flex flex-1 w-[320px] h-[230px] bg-cover">
+
+                    <div className="flex flex-1 w-[320px] h-[230px] bg-cover group">
                         <Image src={product.imageUrl} alt="" width={370} height={230} quality={100}
-                            className="hover:scale-105 transition-transform duration-500"
+                            className="hover:scale-105 transition-transform duration-300 group-hover:-rotate-6 "
                         />
                     </div>
+
                     <StarsIcon />
         
                     <div className="flex flex-col text-center mt-4 items-center">
@@ -30,7 +32,7 @@ export async function ShopProducts() {
                                 {product.price} 
                             </p>
                             <div className="flex flex-row space-x-2">
-                                <span className="text-lg font-extrabold text-darkModerateYello hover:underline">ADICIONAR</span>
+                                <span className="text-lg font-extrabold text-darkModerateYello hover:underline decoration-2 underline-offset-4">ADICIONAR</span>
                             </div>
                         </div>
                     </div>
