@@ -1,8 +1,39 @@
 import { GitHub, Linkedin, LogoHeadIcon } from "@/components/icons/icons"
 import Link from "next/link"
+import { FormEvent } from "react"
+// import { FormEvent, FormEventHandler, useState } from "react"
 
 
-export default function Contact() {
+
+
+
+export default async function Contact() {
+    // const [formData, setFormData] = useState({ email: '', name: '', message: ''})
+    
+
+    async function userMessage(event: FormEvent<HTMLFormElement>) {
+        'use server'
+        event.preventDefault()
+
+        const formData = new FormData(event.currentTarget)
+        const rawFormData = {
+            email: formData.get('email'),
+            name: formData.get('name'),
+            message: formData.get('message')
+        }
+
+        const response = await fetch('http://localhost:3000/api/comments', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(rawFormData)
+        })
+        const data = await response.json()
+
+        console.log('Data storede succesfully: ', data)
+    }
+
 
     return (
         <section className="flex flex-col w-full min-h-full py-20 bg-pale-yellow">
@@ -46,18 +77,22 @@ export default function Contact() {
 
                 
                 <div className="flex flex-col w-full h-full col-span-3 p-10 text-pale-yellow bg-dark-orange">
-                    <form className="flex flex-col w h-full group-rounded-3xl gap-4">
+                    <form 
+                        className="flex flex-col w h-full group-rounded-3xl gap-4"
+                    >
                         <h1 className="text-3xl font-bold">Contato</h1>
 
                         <input 
                             className="flex bg-black/10 rounded-md border-transparent placeholder-darkModerateYello/50 border-0 focus:ring-2 focus:ring-pure-yellow"
+                            name="email"
                             type="email"
                             placeholder="Endereço de E-mail"
-                            required 
+                            required
                         />
 
                         <input
                             className="flex bg-black/10 rounded-md border-transparent placeholder-darkModerateYello/50 border-0 focus:ring-2 focus:ring-pure-yellow" 
+                            name="name"
                             type="text"
                             placeholder="Nome"
                             required
@@ -65,7 +100,7 @@ export default function Contact() {
 
                         <textarea 
                             className="flex bg-black/10 rounded-md border-transparent placeholder-darkModerateYello/50 border-0 focus:ring-2 focus:ring-pure-yellow"
-                            name="" 
+                            name="message" 
                             id=""  
                             rows={5}
                             placeholder="Ensira sua mensage"
@@ -74,12 +109,13 @@ export default function Contact() {
 
                         </textarea>
 
-                        <input 
+                        <button 
                             className="flex bg-black/10 rounded-md mr-0 m-auto px-5 p-3 border-0 focus:ring-2 focus:ring-pure-yellow"
-                            type="button" 
-                            value="ENVIAR" 
-                            
-                        />
+
+                        >
+                            ENVIAR
+                        </button>
+                        
                     </form>    
                 </div>
             </div>
