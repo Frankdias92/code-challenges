@@ -21,8 +21,6 @@ export default async function Page({ params }: { params: {id: string}}) {
   const productId = res
   const priceId = res.default_price as Stripe.Price
 
-    // console.log('PAGE: ', priceId)
-
 
   
   return (
@@ -38,9 +36,9 @@ export default async function Page({ params }: { params: {id: string}}) {
                         <p className="text-base font-bold text-dark-orange leading-tight">{productId.description}</p>
                     </div>
 
+                    {/* FEATURE IMPLEMATION | add diferent prices */}
                     <div className="flex flex-col w-[180px] space-y-2 mt-8">
                         <h3 className=" font-bold text-xl text-black">Escolhar o tamanho</h3>
-                        {/* // adicionar botoes */}
                         
                         <div className="flex flex-row justify-between mb-2">
                             <span className="flex w-10 h-10 ring-[3px] justify-center items-center ring-pure-yellow
@@ -57,11 +55,14 @@ export default async function Page({ params }: { params: {id: string}}) {
                             </span>
                         </div>
 
+
                         <BtnBuyProduct priceId={priceId.id}  />
                     
 
 
                     </div>
+                    {/* FEATURE IMPLEMATION | add diferent prices */}
+
                 </div>
 
                 <div className="flex col-span-2 justify-self-center items-center w-[400px] h-[600px] bg-contain">

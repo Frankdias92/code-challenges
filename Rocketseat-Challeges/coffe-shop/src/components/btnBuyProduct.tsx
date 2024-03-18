@@ -38,10 +38,9 @@ export default function BtnBuyProduct({ priceId }: BtnBuyProductProps) {
         <button
             onClick={handleBuyProduct}
               disabled={loading}
-            className="flex justify-center items-center w-[180px] py-2 bg-darkModerateYello text-pale font-semibold translate-y-4"
+            className="flex justify-center items-center w-[180px] py-2 bg-darkModerateYello hover:bg-pure-yellow transition-colors duration-75 text-pale font-semibold translate-y-4"
         >
             {loading ? 'Carregando...' : 'Fazer pedido'}
-            Fazer Pedido
         </button>
 
   )

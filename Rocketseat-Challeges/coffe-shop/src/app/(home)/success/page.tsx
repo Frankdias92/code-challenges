@@ -8,6 +8,9 @@ import { useEffect, useState } from "react";
 import Image from "next/image";
 import { ClockIcon, PinMapIcon } from "@/components/icons/icons";
 import Head from "next/head";
+import successShop from '@/assets/imgs/successShop.png'
+
+
 
 function Fallback() {
     return <>Loading...</>
@@ -101,13 +104,23 @@ export default function Success() {
                             </div>
                         </div>
                         
-                        <div>
-                            <Image 
-                                src={imageUrl} 
-                                alt={`image do producto da sua compra café ${productName}`}
-                                width={370} height={230} quality={100}
-                                className="hover:scale-105 transition-transform duration-500"
-                            />
+                        <div className="flex relative">
+                            <div className="flex absolute scale-150 -translate-x-48 translate-y-24 z-0">
+                                <Image 
+                                    src={successShop} 
+                                    alt={`image do producto da sua compra café ${productName}`}
+                                    width={370} height={230} quality={100}
+                                    className="drop-shadow-2xl -rotate-12"
+                                />
+                            </div>
+                           <div className="-translate-y-20 -translate-x-20">
+                                <Image 
+                                    src={imageUrl} 
+                                    alt={`image do producto da sua compra café ${productName}`}
+                                    width={470} height={330} quality={100}
+                                    className="hover:rotate-6 hover:-translate-y-4 transition-transform duration-500 z-10"
+                                />
+                           </div>
                         </div>
                     </div>
                 </div>

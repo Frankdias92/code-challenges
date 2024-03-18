@@ -12,7 +12,9 @@ import packager from '../../assets/icons/package.svg'
 import pinMap from '../../assets/icons/pinMap.svg'
 import stars from '../../assets/icons/stars.svg'
 import handLike from '../../assets/icons/handLike.svg'
-import handDeslike from '../../assets/icons/handDeslike.svg'
+import handDesLike from '../../assets/icons/handDeslike.svg'
+import linkedin from '../../assets/icons/linkedin-logo.svg'
+import gitHub from '../../assets/icons/github-logo.svg'
 
 export const ArrowIcon = () => <Image src={arrow} alt="Ícone de seta" />;
 export const CardDarkIcon = () => <Image src={cardDark} className="-translate-x-[.75px]" alt="Ícone de cartão escuro" />;
@@ -25,4 +27,6 @@ export const PackagerIcon = () => <Image src={packager} alt="Ícone de embalagem
 export const PinMapIcon = () => <Image src={pinMap} alt="Ícone de mapa de alfinete" />;
 export const StarsIcon = () => <Image src={stars} alt="Ícone de estrelas" />;
 export const HandLike = () => <Image src={handLike} alt="Ícone de estrelas" />;
-export const HandDeslike = () => <Image src={handDeslike} alt="Ícone de estrelas" />;
+export const HandDeslike = () => <Image src={handDesLike} alt="Ícone de estrelas" />;
+export const Linkedin = () => <Image src={linkedin} alt="Ícone de estrelas" />;
+export const GitHub = () => <Image src={gitHub} alt="Ícone de estrelas" />;

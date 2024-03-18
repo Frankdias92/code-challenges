@@ -28,7 +28,7 @@ export function Header() {
 
                         <div className="w-px h-[38px] bg-dark-orange"/>
 
-                        <Link href={'/'} className="flex items-center gap-2">
+                        <Link href={'/'} className="flex items-center gap-2 p-1 focus:ring-2 focus:ring-darkModerateYello rounded-xl ">
                             
                             <Image src={'https://github.com/frankdias92.png'} alt=""
                                 className="size-9 p-[.75px] rounded-full ring-2 ring-pale"
