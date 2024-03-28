@@ -1,10 +1,15 @@
+
 import Image from 'next/image'
 import  moonYellow  from '../assets/moonYellow.png'
 import  moonBlue  from '../assets/moonBlue.png'
 import  moonPink  from '../assets/moonPink.png'
+import { useRef } from 'react';
+
 
 
 export function Feature() {
+    const featureSectionArrow = useRef<HTMLDivElement>(null);
+    
     const featuredTitle = [
         {
             "id": 1,
@@ -26,10 +31,14 @@ export function Feature() {
         }
     ]
 
-    return (
-        <div className="flex flex-col w-full min-h-full bg-secondary-bg py-[52px] px-10 relative">
 
-            <div className='grid grid-flow-row w-full min-h-full m-auto justify-center gap-12'>
+
+
+
+    return (
+        <div id='Feature' ref={featureSectionArrow} className="flex flex-col w-full min-h-full bg-secondary-bg py-[52px] relative">
+
+            <div className='grid grid-flow-row xl:grid-cols-3 min-h-full m-auto justify-center xl:justify-between gap-12 w-3/4'>
                 {featuredTitle.map(item => {
                     return ( 
                         <div key={item.id} className='flex flex-col justify-start w-[352px] h-[380px]
