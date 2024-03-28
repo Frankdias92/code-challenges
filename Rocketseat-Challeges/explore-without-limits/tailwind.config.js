@@ -14,6 +14,9 @@ module.exports = {
         'font-base-color': '#312D64'
       }
     }
-  }
+  },
+  plugins: [
+    require('@tailwindcss/forms'),
+  ],
   // ...
 }

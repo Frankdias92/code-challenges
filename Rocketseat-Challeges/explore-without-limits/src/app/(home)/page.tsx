@@ -1,6 +1,7 @@
 
 
 import { Feature } from "@/components/feature"
+import { Form } from "@/components/form"
 import { Menu } from "@/components/main"
 
 export default function Home() {
@@ -10,6 +11,7 @@ export default function Home() {
         bg-primary-bg gap-8">
             <Menu />
             <Feature />
+            <Form />
         </section>
     )
 }
