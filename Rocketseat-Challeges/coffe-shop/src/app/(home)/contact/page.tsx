@@ -1,4 +1,5 @@
 import { GitHub, Linkedin, LogoHeadIcon } from "@/components/icons/icons"
+import axios from "axios"
 import Link from "next/link"
 import { FormEvent } from "react"
 // import { FormEvent, FormEventHandler, useState } from "react"
@@ -9,18 +10,19 @@ import { FormEvent } from "react"
 
 export default async function Contact() {
     // const [formData, setFormData] = useState({ email: '', name: '', message: ''})
-    
 
-    async function userMessage(event: FormEvent<HTMLFormElement>) {
+    async function handleForm(formData: FormData) {
         'use server'
-        event.preventDefault()
 
-        const formData = new FormData(event.currentTarget)
         const rawFormData = {
-            email: formData.get('email'),
-            name: formData.get('name'),
-            message: formData.get('message')
+            name: formData.get('name') as string,
+            email: formData.get('email') as string,
+            message: formData.get('message') as string,
         }
+        
+
+        // const testF = 'test click'
+        // console.log(rawFormData)
 
         const response = await fetch('http://localhost:3000/api/comments', {
             method: 'POST',
@@ -29,10 +31,10 @@ export default async function Contact() {
             },
             body: JSON.stringify(rawFormData)
         })
-        const data = await response.json()
-
-        console.log('Data storede succesfully: ', data)
+        // const data = response.json()
+        // console.log(data)
     }
+    
 
 
     return (
@@ -78,6 +80,7 @@ export default async function Contact() {
                 
                 <div className="flex flex-col w-full h-full col-span-3 p-10 text-pale-yellow bg-dark-orange">
                     <form 
+                        action={handleForm}
                         className="flex flex-col w h-full group-rounded-3xl gap-4"
                     >
                         <h1 className="text-3xl font-bold">Contato</h1>
@@ -100,8 +103,8 @@ export default async function Contact() {
 
                         <textarea 
                             className="flex bg-black/10 rounded-md border-transparent placeholder-darkModerateYello/50 border-0 focus:ring-2 focus:ring-pure-yellow"
-                            name="message" 
-                            id=""  
+                            name="message"
+                            id="message"
                             rows={5}
                             placeholder="Ensira sua mensage"
                             required
@@ -109,9 +112,11 @@ export default async function Contact() {
 
                         </textarea>
 
+                        
+
                         <button 
                             className="flex bg-black/10 rounded-md mr-0 m-auto px-5 p-3 border-0 focus:ring-2 focus:ring-pure-yellow"
-
+                            
                         >
                             ENVIAR
                         </button>

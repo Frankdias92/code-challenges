@@ -1,7 +1,6 @@
-import fsPromises from 'fs/promises'
-import { NextApiRequest, NextApiResponse } from 'next';
-import { NextResponse } from 'next/server'
-import path from 'path'
+import { IncomingMessage } from "http"
+import { NextResponse } from "next/server"
+
 
 
 interface Comment {
@@ -10,39 +9,31 @@ interface Comment {
     message: string
 }
 
+export async function GET(req: Request, res: Response) {
+    const { name, email, message} = req.body
 
-export async function POST(req: NextApiRequest, res: NextApiResponse) {
-    const dataFilePath = path.join(process.cwd(), 'src/app/api/comments/data.json');
+    const comment = {
+        name,
+        email,
+        message,
+    }
     
-    // Read the existing data from the JSON file
-    const jsonData = await fsPromises.readFile(dataFilePath)
-    const objectData: Comment[] = JSON.parse(String(jsonData));
-
-    return NextResponse.json(objectData)
+    
+    return NextResponse.json({ message: String(comment) })
 }
 
-export async function GET(req: Response) {
-    const dataFilePath = path.join(process.cwd(), 'src/app/api/comments/data.json');
+export async function POST(req: Request, res: Response) {
+    // const { name } = req.body
+    // const name = formData.get('name');
+    // const email = formData.get('email');
+    // const message = formData.get('message');
 
-    
-    const jsonData = await fsPromises.readFile(dataFilePath, 'utf-8')
-    const objectData: Comment[] = JSON.parse(String(jsonData))
+    // const data: Comment = {
+    //     name: name as string,
+    //     email: email as string,
+    //     message: message as string
+    // };
 
-    // get the data from the request body
-    const { name, email, message } = req.json() as Comment
 
-    // add the new data to the object
-    const newData = {
-        email,
-        name,
-        message
-    }
-    objectData.push(newData)
-
-    // // Write the updated data to the JSON file
-    await fsPromises.writeFile(dataFilePath, JSON.stringify(objectData, null, 2) )
-
-    // Send a succes response
-    return NextResponse.json({ message: objectData })
-
+    return NextResponse.json({ message: 'body' })
 }
