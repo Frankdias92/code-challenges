@@ -1,12 +1,15 @@
+'use client'
+
+import { Footer } from "@/components/footer";
 import { Forms } from "@/components/forms";
-import Image from "next/image";
+import { Menu } from "@/components/menu";
 
 export default function Home() {
   return (
-    <div className="bg-slate-900 text-slate-200">
-      <h1>Forms</h1>
-
+    <div className="flex flex-col items-center justify-between gap-[160px] w-full min-h-full bg-explore-color-bg-primary text-explore-color-text-second">
+      <Menu />
       <Forms />
+      <Footer />
     </div>
   );
 }
