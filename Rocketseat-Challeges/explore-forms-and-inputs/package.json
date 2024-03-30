@@ -5,11 +5,13 @@
   "scripts": {
     "dev": "next dev",
     "build": "next build",
-    "start": "next start",
+    "start": "node --watch src/app/api/server.js",
     "lint": "next lint"
   },
   "dependencies": {
+    "cors": "^2.8.5",
     "express": "^4.19.2",
+    "express-async-errors": "^3.1.1",
     "next": "14.1.4",
     "react": "^18",
     "react-dom": "^18"
