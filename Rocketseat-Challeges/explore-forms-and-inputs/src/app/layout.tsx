@@ -3,7 +3,7 @@ import { Poppins, Staatliches,  } from "next/font/google";
 import "./globals.css";
 
 const staatliches = Staatliches({ subsets: ["latin"], style:"normal", weight:"400" });
-const poppins = Poppins({ subsets: ["latin"], weight: ["300", "400"] });
+const poppins = Poppins({ subsets: ["devanagari"], weight: ["100", "300", "400", "700"], style: ["italic", "normal"] });
 
 export const metadata: Metadata = {
   title: "Create Next App",

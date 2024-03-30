@@ -1,4 +1,6 @@
+
 import { useState } from "react"
+import { Result } from "./result"
 
 
 export function Forms() {
@@ -10,21 +12,10 @@ export function Forms() {
 
 
     return (
-        <section className="flex w-full justify-center">
+        <section className="flex w-full justify-center h-lvh">
             {content ? 
             ( 
-                <form action="/"  >
-                    <div className="flex w-full">
-                        <fieldset className="flex w-full justify-center text-3xl">
-                            <legend>Aprendendo de forma criativa e eficaz!</legend>
-                        </fieldset>
-                    </div>
-
-                    <input type="text" name="teste" required
-                        className="border-0 ring-0 focus:right-2 focus:ring-red-600 invalid:ring-red-500 rounded-lg"
-                    />
-                    <input type="submit" value='Search' onClick={handleClickContent}/>
-                </form> 
+                <Result handleClickContent={handleClickContent}/>
             ) : 
             (
                 <div className="flex flex-col items-center w-3/4 bg-explore-color-bg-secondary py-8 px-16
@@ -32,8 +23,8 @@ export function Forms() {
                 >
                     <h2 className="text-4xl tracking-widest">Aprendendo de forma criativa e eficaz!</h2>
 
-                    <div className="flex w-full justify-center leading-5 break-words gap-11">
-                        <div className="flex flex-col w-[25%] space-y-3">
+                    <div className="flex w-full justify-center font-poppins leading-6 break-words gap-11 tracking-wider antialiased">
+                        <div className="flex flex-col w-[30%] space-y-3">
                             <p>
                                 Domine os fundamentos do JavaScript de forma divertida e envolvente com este desafio interativo.
                             </p>
@@ -41,19 +32,25 @@ export function Forms() {
                                 Explore conceitos básicos como variáveis, tipos de dados, operadores e muito mais através de uma interface dinâmica e intuitiva construída com Next.js.
                             </p>
                         </div>
-                        <div className="flex flex-col w-[25%] space-y-3">
+                        <div className="flex flex-col w-[30%] space-y-3">
                             <span>Aprimore seu aprendizado com:</span>
-                            <p className="font-poppins pl-6">
-                                Formulários interativos com validação em tempo real
-                                Explicações detalhadas e exemplos práticos
-                                Feedback visual e mensagens informativas
-                                Recursos de aprendizado adicionais
+                            <p className="flex flex-col pl-6 gap-y-2 italic">
+                                <span>
+                                    Formulários interativos com validação em tempo real
+                                    Explicações detalhadas e exemplos práticos
+                                </span>
+                                <span>
+                                    Feedback visual e mensagens informativas
+                                </span>
+                                <span>
+                                    Recursos de aprendizado adicionais
+                                </span>
                             </p>
                         </div>
                     </div>
 
 
-                    <h3 className="text-xl font-poppins w-3/5 text-center">
+                    <h3 className="text-xl font-poppins w-3/5 text-center antialiased">
                         Desbloqueie seu potencial em JavaScript e junte-se à mim nesta jornada de aprendizado!
                     </h3>
 
@@ -61,7 +58,7 @@ export function Forms() {
                         type="submit" 
                         value='Vamos começar?' 
                         onClick={handleClickContent}
-                        className="flex px-12 py-5 bg-explore-color-offShore rounded-xl"
+                        className="flex px-12 py-5 bg-explore-color-offShore rounded-xl antialiased"
                     />
                 </div>
             )}

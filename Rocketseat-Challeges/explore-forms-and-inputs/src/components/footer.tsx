@@ -8,7 +8,7 @@ export function Footer() {
         <footer className="flex w-full h-[134px] justify-center bg-explore-color-text-second text-explore-color-text-first">
             <div className="flex w-3/4 flex-col justify-between py-6">
                 <div className="flex w-full flex-col items-center">
-                    <p className="text-sm font-poppins">Letss chat</p>
+                    <p className="text-sm font-poppins antialiased">Letss chat</p>
                     <span className="flex gap-x-3">
                         <Link href={'https://www.linkedin.com/in/franklinmacedodias/'} target="_blank">
                             <IconLinkedin />
@@ -22,7 +22,7 @@ export function Footer() {
                 <div className="w-full h-0.5 bg-explore-color-text-first"/>
 
                 <div className="flex justify-center">
-                    <p className="text-sm font-poppins">
+                    <p className="text-sm font-poppins antialiased font-normal">
                         © 2024 Franklin Macedo, Brazil. All Rights Reserved
                     </p>
                 </div>
