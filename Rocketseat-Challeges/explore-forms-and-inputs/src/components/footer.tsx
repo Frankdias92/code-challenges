@@ -6,7 +6,7 @@ export function Footer() {
 
     return (
         <footer className="flex w-full h-[134px] justify-center bg-explore-color-text-second text-explore-color-text-first">
-            <div className="flex w-3/4 flex-col justify-between py-6">
+            <div className="flex sm:w-3/4 flex-col justify-between py-6">
                 <div className="flex w-full flex-col items-center">
                     <p className="text-sm font-poppins antialiased">Letss chat</p>
                     <span className="flex gap-x-3">

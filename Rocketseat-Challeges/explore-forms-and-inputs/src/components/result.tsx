@@ -82,68 +82,70 @@ export function Result({ handleClickContent }: handleClickContentProps) {
     
 
     return (
-        <section className="flex w-full h-full justify-center">
-            <div className="grid grid-cols-2 w-3/4 font-poppins relative">
-                <form 
-                    method="POST"
-                    onSubmit={onSubmit}
-                    className="flex flex-col w-[70%]"
-                >
-
-                    <label className="mb-2 text-lg">
-                        Como posso te chamar?
-                    </label>
-                    <input 
-                        name="name"  
-                        type="text"
-                        required
-                        className="flex h-14 mb-2 pl-4 border-0 bg-transparent ring-1 ring-explore-color-text-first focus:ring-2 focus:ring-explore-color-offShore
-                        invalid:text-red-600 rounded-lg outline-none"
-                    />
-
-                    <label className="mb-2 text-lg">
-                        Como posso te chamar?
-                    </label>
-                    <div className="flex justify-between items-center">
-                        <input 
-                            name="value1"  
-                            type="number"
-                            required
-                            className="flex w-1/3 h-14 mb-2 pl-4 border-0 bg-transparent ring-1 ring-explore-color-text-first focus:ring-2 focus:ring-explore-color-offShore
-                            invalid:text-red-600 rounded-lg outline-none"
-                        />
-                        <span className="text-3xl font-bold">
-                            + 
-                        </span>
-                        <input 
-                            name="value2"  
-                            type="number"
-                            required
-                            className="flex w-1/3 h-14 pl-4 border-0 bg-transparent ring-1 ring-explore-color-text-first focus:ring-2 focus:ring-explore-color-offShore
-                            invalid:text-red-600 rounded-lg outline-none"
-                        />
-                    </div>
-
-
-
-
-                    {/* <input type="button" value="Enviar"/>   */}
-                    <Button
-                        type="submit"
-                        className="flex text-xl h-[62px] tracking-widest font-bold justify-center px-12 py-5 bg-explore-color-offShore rounded-xl mt-6 shadow-lg antialiased
-                        outline-none border-0 focus:ring-2 focus:ring-explore-color-text-second"
-                            style={{
-                                outline: isFocusVisible ? 'rgb(245 157 26)' : 'none',
-                            }}
+        <section className="flex w-full h-full ">
+            <div className="grid lg:grid-cols-2 grid-cols-1 w-full m-auto font-poppins relative">
+                <div className="flex lg:w-[90%] justify-center w-full mb-20 top-0 left-0">
+                    <form 
+                        method="POST"
+                        onSubmit={onSubmit}
+                        className="flex flex-col w-full lg:w-[90%]"
                     >
-                        MOSTRAR DADOS
-                    </Button>
-                </form>
+
+                        <label className="mb-2 text-lg">
+                            Como posso te chamar?
+                        </label>
+                        <input 
+                            name="name"  
+                            type="text"
+                            required
+                            className="flex h-14 mb-2 pl-4 border-0 bg-transparent ring-1 ring-explore-color-text-first focus:ring-2 focus:ring-explore-color-offShore
+                            invalid:text-red-600 rounded-lg outline-none"
+                        />
+
+                        <label className="mb-2 text-lg">
+                            Como posso te chamar?
+                        </label>
+                        <div className="flex justify-between items-center">
+                            <input 
+                                name="value1"  
+                                type="number"
+                                required
+                                className="flex w-1/3 h-14 mb-2 pl-4 border-0 bg-transparent ring-1 ring-explore-color-text-first focus:ring-2 focus:ring-explore-color-offShore
+                                invalid:text-red-600 rounded-lg outline-none"
+                            />
+                            <span className="text-3xl font-bold">
+                                + 
+                            </span>
+                            <input 
+                                name="value2"  
+                                type="number"
+                                required
+                                className="flex w-1/3 h-14 pl-4 border-0 bg-transparent ring-1 ring-explore-color-text-first focus:ring-2 focus:ring-explore-color-offShore
+                                invalid:text-red-600 rounded-lg outline-none"
+                            />
+                        </div>
+
+
+
+
+                        {/* <input type="button" value="Enviar"/>   */}
+                        <Button
+                            type="submit"
+                            className="flex text-xl w-full h-[62px] tracking-widest font-bold justify-center px-12 py-5 bg-explore-color-offShore rounded-xl mt-6 shadow-lg antialiased
+                            outline-none border-0 focus:ring-2 focus:ring-explore-color-text-second"
+                                style={{
+                                    outline: isFocusVisible ? 'rgb(245 157 26)' : 'none',
+                                }}
+                        >
+                            MOSTRAR DADOS
+                        </Button>
+                    </form>
+                </div>
 
 
                 {/* result goes here */}
-                <Suspense>
-                    <div className="flex flex-col w-full">
+                
+                    <div className="flex flex-1 flex-col">
                         
                         {nameUser
                             ? (
@@ -158,21 +160,24 @@ export function Result({ handleClickContent }: handleClickContentProps) {
                                     <p>E o resultado da divizão resulta em um {strongColorConvert('Number', division)}</p>
                                     <p>A multiplicação da operação entre {division} e {multiply} = {strongColorConvert(divisionVsMultiply, divisionVsMultiply)}</p>
                                 </div>
-                            ) : (``)
+                            ) : ( '' )
                         }
                         
 
                     </div> 
-                </Suspense>
+                
 
                 {/* buttton switch */}
-                <input 
+                <Button 
                     type="submit" 
                     value='<' 
                     onClick={handleClickContent}
-                    className="flex size-10 justify-center items-center bg-explore-color-bg-secondary rounded-full antialiased
-                        absolute top-0 left-0 -translate-y-12"
-                />   
+                    className="flex size-10 justify-center items-center bg-explore-color-bg-secondary  antialiased
+                        absolute top-0 left-0 -translate-y-12 outline-none border-0 focus:ring-2 focus:ring-explore-color-text-second"
+                    style={{
+                        outline: isFocusVisible ? 'rgb(245 157 26)' : 'none',
+                    }}
+                >{'<'}</Button>   
             </div>
         </section>
     )
