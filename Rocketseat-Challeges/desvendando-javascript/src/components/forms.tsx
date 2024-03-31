@@ -18,7 +18,7 @@ export function Forms() {
 
 
     return (
-        <section className="flex flex-col w-full justify-between">
+        <section className="flex flex-col w-full justify-between min-h-full">
             <div className="flex w-full justify-center m-auto">
 
                 <div className="flex m-auto w-3/4 justify-between">
