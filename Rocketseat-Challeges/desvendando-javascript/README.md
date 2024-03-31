@@ -1,51 +1,48 @@
+# Project Documentation "Desvendando JavaScript"
 
-# Documentação do Projeto "Explore Forms and Inputs"
+## Overview
 
-## Visão Geral
+The "Desvendando JavaScript" project is a web application developed in Next.js that allows users to interact with different types of forms and inputs. The application includes features for sending data to a server, processing responses, and displaying dynamic results in the user interface.
 
-O projeto "Explore Forms and Inputs" é uma aplicação web desenvolvida em React.js que permite aos usuários interagirem com diferentes tipos de formulários e inputs. A aplicação inclui funcionalidades para enviar dados para um servidor, processar as respostas e exibir resultados dinâmicos na interface do usuário.
+## Key Features
 
-## Funcionalidades Principais
+- **Interactive Forms:** Users can interact with two fields, one input to enter their name and another to perform a sequence of function calculations.
+- **Data Processing:** Data submitted by users is processed by the server, and the responses are dynamically displayed in the interface.
+- **Results Display:** The results are displayed clearly and organized in the interface, allowing users to easily understand the processed information.
 
-- **Formulários Interativos:** Os usuários podem preencher formulários com diferentes tipos de inputs, como texto, número, e enviar os dados para processamento.
-- **Processamento de Dados:** Os dados enviados pelos usuários são processados pelo servidor e as respostas são exibidas dinamicamente na interface.
-- **Exibição de Resultados:** Os resultados são exibidos de forma clara e organizada na interface, permitindo aos usuários entender facilmente as informações processadas.
+## How to Run
 
-## Como Executar
-
-1. Certifique-se de ter o Node.js instalado em sua máquina. ("20.11.1")
-2. Clone este repositório para o seu ambiente local.
-3. Abra o terminal e navegue até o diretório raiz do projeto.
-4. Execute o seguinte comando para instalar as dependências:
+1. Ensure you have Node.js installed on your machine. (Version 20.11.1)
+2. Clone this repository to your local environment.
+3. Open the terminal and navigate to the project's root directory.
+4. Run the following command to install dependencies:
 
    ```
    npm install
    ```
 
-5. Após a instalação das dependências, execute o seguinte comando para iniciar a aplicação:
-- comando para inicializar o servidor
+5. After installing dependencies, run the following command to start the application:
+   - Command to initialize the server
 
    ```
    npm run dev
    ```
 
-- comando para inicializar o servidor
+   - Command to initialize the server
 
    ```
    npm start
    ```
 
-6. Acesse a aplicação no navegador, `http://localhost:3000`.
-- Servidor rodando na porta: 3333 com routa em /response
-suportando GET e POST apenas.
+6. Access the application in the browser, `http://localhost:3000`.
+   - Server running on port: 3333 with route at /response
+     supporting only GET and POST.
 
-## Notas Adicionais
+## Additional Notes
 
-- A aplicação utiliza a biblioteca `framer-motion` para adicionar animações de transição aos elementos.
-- A estrutura do projeto pode ser expandida para incluir mais funcionalidades, como validação de formulários e tratamento de erros.
-- Testes automatizados podem ser implementados para garantir a robustez e confiabilidade da aplicação.
+- The application uses the `framer-motion` library to add transition animations to elements.
+- The project structure can be expanded to include more features, such as form validation and error handling.
+- Automated tests can be implemented to ensure the robustness and reliability of the application.
 
-
-## Gostaria de compartilhar um curso relevante nesse projeto?
-veja como você pode ajudar
-[aqui](CONTRIBUTING.md).
+## Would you like to share a relevant course related to this project?
+See how you can contribute [here](CONTRIBUTING.md).

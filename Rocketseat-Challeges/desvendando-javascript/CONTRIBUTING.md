@@ -1,43 +1,43 @@
-# Contribuindo para o Projeto "Explore Forms and Inputs"
+# Contributing to the "Desvendando JavaScript" Project
 
-Obrigado por considerar contribuir para este projeto! Seu apoio é fundamental para tornar esta aplicação ainda melhor. Sinta-se à vontade para sugerir melhorias, relatar bugs ou enviar novos recursos.
+Thank you for considering contributing to this project! Your support is crucial to making this application even better. Feel free to suggest improvements, report bugs, or submit new features.
 
-## Como Contribuir
+## How to Contribute
 
-1. Fork o repositório e clone-o localmente.
-2. Crie uma branch para sua contribuição:
+1. Fork the repository and clone it locally.
+2. Create a branch for your contribution:
 
    ```bash
-   git checkout -b feature/nova-funcionalidade
+   git checkout -b feature/new-feature
    ```
 
-3. Faça suas alterações e commit-as:
+3. Make your changes and commit them:
 
    ```bash
    git add .
-   git commit -m "Adiciona nova funcionalidade"
+   git commit -m "Add new feature"
    ```
 
-4. Push suas alterações para sua branch:
+4. Push your changes to your branch:
 
    ```bash
-   git push origin feature/nova-funcionalidade
+   git push origin feature/new-feature
    ```
 
-5. Abra um Pull Request (PR) para enviar suas alterações para revisão.
+5. Open a Pull Request (PR) to submit your changes for review.
 
-## Diretrizes de Contribuição
+## Contribution Guidelines
 
-- Certifique-se de descrever claramente suas alterações no PR e fornecer contexto suficiente.
-- Siga os padrões de codificação e as melhores práticas estabelecidas no projeto.
-- Teste suas alterações localmente antes de abrir um PR.
-- Se estiver contribuindo com código, verifique se ele passa em todos os testes e não introduz regressões.
-- Respeite os outros contribuidores e mantenha um ambiente amigável e inclusivo.
+- Make sure to clearly describe your changes in the PR and provide sufficient context.
+- Follow the coding standards and best practices established in the project.
+- Test your changes locally before opening a PR.
+- If you are contributing code, ensure it passes all tests and does not introduce regressions.
+- Respect other contributors and maintain a friendly and inclusive environment.
 
-## Sugestões de Contribuições
+## Suggestions for Contributions
 
-- Divulgação de conteudo de curso sobre javascript, typescript ou algoritmo.
+- Sharing course content on JavaScript, TypeScript, or algorithms.
 
-## Como Relatar Problemas
+## How to Report Issues
 
-Se você encontrar algum bug ou tiver alguma sugestão, sinta-se à vontade para abrir uma issue no GitHub. Certifique-se de incluir o máximo de informações possível para facilitar a reprodução e resolução do problema.
+If you encounter any bugs or have any suggestions, feel free to open an issue on GitHub. Be sure to include as much information as possible to facilitate the reproduction and resolution of the issue.
