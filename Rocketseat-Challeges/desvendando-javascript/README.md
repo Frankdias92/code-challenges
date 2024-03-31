@@ -1,36 +1,51 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
 
-## Getting Started
+# Documentação do Projeto "Explore Forms and Inputs"
 
-First, run the development server:
+## Visão Geral
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+O projeto "Explore Forms and Inputs" é uma aplicação web desenvolvida em React.js que permite aos usuários interagirem com diferentes tipos de formulários e inputs. A aplicação inclui funcionalidades para enviar dados para um servidor, processar as respostas e exibir resultados dinâmicos na interface do usuário.
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## Funcionalidades Principais
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+- **Formulários Interativos:** Os usuários podem preencher formulários com diferentes tipos de inputs, como texto, número, e enviar os dados para processamento.
+- **Processamento de Dados:** Os dados enviados pelos usuários são processados pelo servidor e as respostas são exibidas dinamicamente na interface.
+- **Exibição de Resultados:** Os resultados são exibidos de forma clara e organizada na interface, permitindo aos usuários entender facilmente as informações processadas.
 
-This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and load Inter, a custom Google Font.
+## Como Executar
 
-## Learn More
+1. Certifique-se de ter o Node.js instalado em sua máquina. ("20.11.1")
+2. Clone este repositório para o seu ambiente local.
+3. Abra o terminal e navegue até o diretório raiz do projeto.
+4. Execute o seguinte comando para instalar as dependências:
 
-To learn more about Next.js, take a look at the following resources:
+   ```
+   npm install
+   ```
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+5. Após a instalação das dependências, execute o seguinte comando para iniciar a aplicação:
+- comando para inicializar o servidor
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
+   ```
+   npm run dev
+   ```
 
-## Deploy on Vercel
+- comando para inicializar o servidor
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+   ```
+   npm start
+   ```
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+6. Acesse a aplicação no navegador, `http://localhost:3000`.
+- Servidor rodando na porta: 3333 com routa em /response
+suportando GET e POST apenas.
+
+## Notas Adicionais
+
+- A aplicação utiliza a biblioteca `framer-motion` para adicionar animações de transição aos elementos.
+- A estrutura do projeto pode ser expandida para incluir mais funcionalidades, como validação de formulários e tratamento de erros.
+- Testes automatizados podem ser implementados para garantir a robustez e confiabilidade da aplicação.
+
+
+## Gostaria de compartilhar um curso relevante nesse projeto?
+veja como você pode ajudar
+[aqui](CONTRIBUTING.md).
