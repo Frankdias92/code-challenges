@@ -1,15 +1,13 @@
 'use cliente'
 
 import React, { FormEvent, FormEventHandler, Suspense, useState } from "react"
-
+import {Button, Tooltip} from "@nextui-org/react"
 
 interface handleClickContentProps {
     handleClickContent: () => void,
 }
 
-interface responseDataProps {
-    data: string
-}
+
 
 export function Result({ handleClickContent }: handleClickContentProps) {
     const [nameUser, setNameUser] = useState<string>('')
@@ -19,29 +17,34 @@ export function Result({ handleClickContent }: handleClickContentProps) {
     async function onSubmit(event: FormEvent<HTMLFormElement>) {
         event.preventDefault()
 
-        const formData = new FormData(event.currentTarget)
-        // console.log(formData.get('name')) // this is another way to use
-        const response = await fetch('http://localhost:3333/response', {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json'
-            },
-            body: JSON.stringify(Object.fromEntries(formData))
-        })
-
-        const responseData = await response.json()
-        const data = responseData
-        const firstNumber = data.firstNumber
-        const secondNumber = data.secondNumber
-        
-        if (data) {
-            setNameUser(data.name)
-            setvalue1(firstNumber)
-            setvalue2(secondNumber)
-
-            console.log('Dados recebido:', data);
-        } else {
-            console.log('Dados inválidos recebidos do servidor:', responseData);
+        try {
+            const formData = new FormData(event.currentTarget);
+            const response = await fetch("http://localhost:3333/response", {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json",
+                },
+                body: JSON.stringify(Object.fromEntries(formData)),
+            });
+    
+            if (!response.ok) {
+                throw new Error("Falha na requisição");
+            }
+    
+            const responseData = await response.json();
+            const { name, firstNumber, secondNumber } = responseData;
+    
+            if (!name || !firstNumber || !secondNumber) {
+                throw new Error("Dados inválidos recebidos do servidor");
+            }
+    
+            setNameUser(name);
+            setvalue1(firstNumber);
+            setvalue2(secondNumber);
+    
+            console.log("Dados recebidos:", responseData);
+        } catch (error) {
+            console.error("Erro ao processar a requisição:", error);
         }
     
     }
@@ -54,11 +57,20 @@ export function Result({ handleClickContent }: handleClickContentProps) {
     
 
 
-    function strongColorConvert(props: any){
+    function strongColorConvert(props: any, res: any){
         return (
-            <span className="text-explore-color-offShore">
-                {props}
-            </span>
+            <Tooltip
+                content={
+                    <div className="px-1 py-2 font-poppins">
+                        <div className="text-small font-bold">{props}</div>
+                        <div className="text-tiny">{typeof(res)}</div>
+                    </div>
+                }
+            >
+                <span className="text-explore-color-offShore">
+                    {props}
+                </span>
+            </Tooltip>
         )
     }
     
@@ -111,12 +123,12 @@ export function Result({ handleClickContent }: handleClickContentProps) {
 
 
                     {/* <input type="button" value="Enviar"/>   */}
-                    <button 
+                    <Button
                         type="submit"
-                        className="flex text-xl tracking-widest font-bold justify-center px-12 py-5 bg-explore-color-offShore rounded-xl mt-6 antialiased"
+                        className="flex text-xl h-[62px] tracking-widest font-bold justify-center px-12 py-5 bg-explore-color-offShore rounded-xl mt-6 shadow-lg antialiased"
                     >
                         MOSTRAR DADOS
-                    </button>
+                    </Button>
                 </form>
 
 
@@ -128,14 +140,14 @@ export function Result({ handleClickContent }: handleClickContentProps) {
                             ? (
                                 <div className="space-y-2">
                                     <h2 className="text-3xl font-normal">{nameUser}, Muito obrigado por sua visita!</h2>
-                                    <p>Resultado da soma foi = <span className="text-explore-color-offShore">{sum}</span></p>
-                                    <p>O calculo da sua operação resultou em um {strongColorConvert('Number')}</p>
-                                    <p>{nameUser}, seu nome resulta em uma {strongColorConvert('String')}</p>
-                                    <p>A subtração da sua operação é {strongColorConvert(subtraction)}</p>
-                                    <p>A multiplicação da operação é {strongColorConvert(multiply)}</p>
-                                    <p>Dividindo o valor da subtração e o da multiplicação temos o resultado = {strongColorConvert(division)}</p>
-                                    <p>E o resultado da divizão resulta em um {strongColorConvert('Number')}</p>
-                                    <p>A multiplicação da operação entre {strongColorConvert(division)} e {strongColorConvert(multiply)} = {strongColorConvert(divisionVsMultiply)}</p>
+                                    <p>Resultado da soma foi = {strongColorConvert(sum, sum)}</p>
+                                    <p>O calculo da sua operação resultou em um typeof {strongColorConvert('Number', sum)}</p>
+                                    <p>{nameUser}, seu nome resulta em um typeof {strongColorConvert('String', nameUser)}</p>
+                                    <p>A subtração da sua operação é {strongColorConvert(subtraction, subtraction)}</p>
+                                    <p>A multiplicação da operação é {strongColorConvert(multiply, multiply)}</p>
+                                    <p>Dividindo o valor da subtração e o da multiplicação temos o resultado = {strongColorConvert(division, division)}</p>
+                                    <p>E o resultado da divizão resulta em um {strongColorConvert('Number', division)}</p>
+                                    <p>A multiplicação da operação entre {division} e {multiply} = {strongColorConvert(divisionVsMultiply, divisionVsMultiply)}</p>
                                 </div>
                             ) : (``)
                         }
