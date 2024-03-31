@@ -1,9 +1,13 @@
 
 import { useState } from "react"
 import { Result } from "./result"
+import { Button } from "@nextui-org/react"
+import { useFocusRing } from "@react-aria/focus"
+
 
 
 export function Forms() {
+    let { isFocusVisible, focusProps } = useFocusRing()
     const [content, setContent] = useState(false)
 
     const handleClickContent = () => {
@@ -15,8 +19,7 @@ export function Forms() {
         <section className="flex flex-col w-full justify-between">
             <div className="flex w-full justify-center">
 
-                    <Result handleClickContent={handleClickContent}/>
-{/*                   
+                  
                 {content ? 
                 ( 
                     <Result handleClickContent={handleClickContent}/>
@@ -58,15 +61,23 @@ export function Forms() {
                             Desbloqueie seu potencial em JavaScript e junte-se à mim nesta jornada de aprendizado!
                         </h3>
 
-                        <input 
-                            type="submit" 
-                            value='Vamos começar?' 
+                        {/* <input type="button" value="Enviar"/>   */}
+                        <Button
+
+                            type="submit"
                             onClick={handleClickContent}
-                            className="flex px-12 py-5 bg-explore-color-offShore rounded-xl antialiased"
-                        />
+                            className="flex text-xl h-[62px] tracking-widest font-bold justify-center px-12 py-5 bg-explore-color-offShore rounded-xl mt-6 shadow-lg antialiased
+                            outline-none border-0 focus:ring-2 focus:ring-explore-color-text-second "
+                            style={{
+                                outline: isFocusVisible ? 'rgb(245 157 26)' : 'none',
+                            }}
+                        
+                        >
+                            MOSTRAR DADOS
+                        </Button>
                     </div>
                 )}
-*/}
+
 
             </div>
         </section>

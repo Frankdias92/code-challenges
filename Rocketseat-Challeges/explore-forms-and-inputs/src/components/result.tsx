@@ -3,6 +3,9 @@
 import React, { FormEvent, FormEventHandler, Suspense, useState } from "react"
 import {Button, Tooltip} from "@nextui-org/react"
 
+import { useFocusRing } from "@react-aria/focus"
+
+
 interface handleClickContentProps {
     handleClickContent: () => void,
 }
@@ -10,6 +13,8 @@ interface handleClickContentProps {
 
 
 export function Result({ handleClickContent }: handleClickContentProps) {
+    let { isFocusVisible, focusProps } = useFocusRing()
+
     const [nameUser, setNameUser] = useState<string>('')
     const [value1, setvalue1] = useState<number>()
     const [value2, setvalue2] = useState<number>()
@@ -125,7 +130,11 @@ export function Result({ handleClickContent }: handleClickContentProps) {
                     {/* <input type="button" value="Enviar"/>   */}
                     <Button
                         type="submit"
-                        className="flex text-xl h-[62px] tracking-widest font-bold justify-center px-12 py-5 bg-explore-color-offShore rounded-xl mt-6 shadow-lg antialiased"
+                        className="flex text-xl h-[62px] tracking-widest font-bold justify-center px-12 py-5 bg-explore-color-offShore rounded-xl mt-6 shadow-lg antialiased
+                        outline-none border-0 focus:ring-2 focus:ring-explore-color-text-second"
+                            style={{
+                                outline: isFocusVisible ? 'rgb(245 157 26)' : 'none',
+                            }}
                     >
                         MOSTRAR DADOS
                     </Button>
