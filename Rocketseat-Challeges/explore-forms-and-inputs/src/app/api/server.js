@@ -16,15 +16,17 @@ app.use(bodyParser.json())
 
 app.get('/response', (req, res) => {
     const { name } = req.query
-    res.send(`name: ${name}`)
+    res.send({ message: 'Hello Dev!'})
 })
 
 
 app.post('/response', (req, res) => {
-    const {name} = req.body
+    const {name, value1, value2} = req.body
+    const firstNumber = Number(value1)
+    const secondNumber = Number(value2)
 
-    console.log(name)
-    res.json({ formData: name })
+    console.log(firstNumber)
+    res.json({ name, firstNumber, secondNumber })
 })
 
 const PORT = 3333
