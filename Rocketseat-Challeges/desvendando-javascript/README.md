@@ -5,10 +5,8 @@
 The "Desvendando JavaScript" project is a web application developed in Next.js that allows users to interact with different types of forms and inputs. The application includes features for sending data to a server, processing responses, and displaying dynamic results in the user interface.
 
 ## Preview
-<video width="640" height="360" controls>
-  <source src="https://youtu.be/3RP86EAuoJg" type="video/mp4">
-  Your browser does not support the video tag.
-</video>
+Uploading desvendando js.mp4…
+
 
 ## Key Features
 
