@@ -6,7 +6,7 @@ The "Desvendando JavaScript" project is a web application developed in Next.js t
 
 ## Preview
 <video width="640" height="360" controls>
-  <source src="./public/preview.mp4" type="video/mp4">
+  <source src="https://youtu.be/3RP86EAuoJg" type="video/mp4">
   Your browser does not support the video tag.
 </video>
 
