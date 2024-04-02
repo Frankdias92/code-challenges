@@ -82,7 +82,7 @@ export function Result({ handleClickContent }: handleClickContentProps) {
     
 
     return (
-        <section className="flex w-full h-full">
+        <section className="flex w-full h-full mt-10">
             <div className="grid lg:grid-cols-2 grid-cols-1 w-full m-auto font-poppins relative">
                 <div className="flex lg:w-[90%] justify-center w-full mb-20 top-0 left-0">
                     <form 
