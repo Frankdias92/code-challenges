@@ -24,18 +24,18 @@ export default function ImcPage() {
     function handleCalcIMC(weight: number,height: number) {
         const imc = (weight / ((height / 100) ** 2))
         handleShowIMC(imc)
-        
+
         return imc
     }
     
     function handleShowIMC(resultImc: number) {
         if (resultImc <= 18.5) {
             return setMessageIMC('tu vai sumir')
-        } else if ( resultImc > 18.5 || resultImc <= 24.9) {
+        } else if ( resultImc > 18.5 && resultImc <= 24.9) {
             return setMessageIMC('Você esta dentro do peso normal')
-        } else if ( resultImc > 25 || resultImc <= 29.9) {
+        } else if ( resultImc > 25 && resultImc <= 29.9) {
             return setMessageIMC('Você passou um pouco do peso')
-        } else if ( resultImc > 30 || resultImc <= 39.9 ) {
+        } else if ( resultImc > 30 && resultImc <= 39.9 ) {
             return setMessageIMC('Ok, você está obeso!')
         } else if ( resultImc > 40 ) {
             return setMessageIMC('Voce deveria procurar se cuidar, você está em nivel critico!')
