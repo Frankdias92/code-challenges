@@ -3,9 +3,9 @@ import { Montserrat, Nunito, Salsa } from "next/font/google";
 import "./globals.css";
 
 
-const montserrat = Montserrat({ subsets: ["latin"], style: ["italic", "normal"], weight: ["400"]});
-const nunito = Nunito({ subsets: ["latin"], weight: ["400", "700"] });
-const salsa = Salsa({ subsets: ["latin"], weight: ["400"] });
+const montserrat = Montserrat({ subsets: ["latin", "cyrillic"], style: ["italic", "normal"]});
+const nunito = Nunito({ subsets: ["latin"], display: 'swap', style:"normal", variable: '--nunito' });
+const salsa = Salsa({ subsets: ["latin"], weight: ["400"], variable: '--salsa' });
 
 
   
@@ -24,7 +24,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className={`${montserrat.className}`}>{children}</body>
+      <body className={`${montserrat.className} ${salsa} ${nunito}`}>{children}</body>
     </html>
   );
 }
