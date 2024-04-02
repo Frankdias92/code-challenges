@@ -44,7 +44,7 @@ export default function ImcPage() {
 
     return (
         <div className="flex flex-col justify-center items-center w-full">
-            <div className="w-3/4">
+            <div className="flex w-3/4">
 
                 <div className="flex w-1/3">
                     
@@ -89,14 +89,18 @@ export default function ImcPage() {
                             MOSTRAR DADOS
                         </Button>
                     </form>
-                    {resultImc ? (
-                        <div>
-                            <span>{resultImc.toFixed(2)}</span>
-                            <span>{messageIMC}</span>
-                        </div>
-                        ) : ( '' )}
+
                 </div>
 
+                {resultImc ? (
+                    <div className="flex flex-col w-full ml-8 py-2 font-poppins">
+                        <span>
+                            Seu IMC: <span className="text-2xl  text-explore-color-offShore">{resultImc.toFixed(2)}</span>
+                        </span>
+
+                        <span className="italic">{messageIMC}</span>
+                    </div>
+                ) : ( '' )}
             </div>
         </div>
     )
