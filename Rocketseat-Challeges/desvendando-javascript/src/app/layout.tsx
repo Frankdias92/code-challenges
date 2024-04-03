@@ -1,10 +1,11 @@
 import type { Metadata } from "next";
-import { Poppins, Staatliches,  } from "next/font/google";
+import { Caveat, Poppins, Staatliches } from "next/font/google";
 import "./globals.css";
-
 
 const staatliches = Staatliches({ subsets: ["latin"], style:"normal", weight:"400" });
 const poppins = Poppins({ subsets: ["devanagari"], weight: ["100", "300", "400", "700"], style: ["italic", "normal"] });
+const caveat = Caveat({ subsets: ["latin"], variable: '--caveat'})
+
 
 export const metadata: Metadata = {
   title: "Desvendando JavaScript",
@@ -18,7 +19,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en" className="dark">
-      <body className={staatliches.className}>
+      <body className={`${staatliches.className} ${caveat.variable}`}>
         {children}
       </body>
     </html>

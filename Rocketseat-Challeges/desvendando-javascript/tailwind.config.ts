@@ -17,7 +17,8 @@ const config: Config = {
         "explore-color-offShore": "#F59D1A",
       },
       fontFamily: {
-        'poppins': 'Poppins'
+        'poppins': 'Poppins',
+        'caveat': ['Caveat']
       }
     },
   },

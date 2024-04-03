@@ -38,6 +38,11 @@ export default function NavForms() {
                         Imc
                     </Link>
                 </BreadcrumbItem>
+                <BreadcrumbItem key="timer" isCurrent={currentPage === "timer"}>
+                    <Link className={`link ${pathname === '/timer' ? 'active' : ''}`} href={'/timer'}>
+                        Imc
+                    </Link>
+                </BreadcrumbItem>
                 </Breadcrumbs>
 
                 <div className="flex gap-4">
