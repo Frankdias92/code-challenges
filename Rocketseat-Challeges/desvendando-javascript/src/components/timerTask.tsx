@@ -1,33 +1,65 @@
 import { caveat } from '@/app/fonts'
 import {Button} from "@nextui-org/react"
 import { useFocusRing } from '@react-aria/focus'
-import { useState } from 'react'
+import { differenceInSeconds } from 'date-fns'
+import { Span } from 'next/dist/trace'
+import { FormEvent, useEffect, useState } from 'react'
 
 
+
+interface NewCycleTimer {
+    id: string
+    taskName: string
+    taskMinutes: number
+    startData: Date
+}
 
 export function TimerTask() {
     let { isFocusVisible, focusProps } = useFocusRing()
     const [ isSubmitDisabled, setIsSubmitDisabled ] = useState<string>('')
-    const [nameTaks, setNameTask] = useState('')
-    const [taskAmountMinutes, setTaskAmountMinutes] = useState<Number>()
+    const [newCyletimer, setNewCycleTimer] = useState<NewCycleTimer[]>([])
+    const [activeCycleId, setActiveCycleId] = useState<string | null>(null)
+    const [secondsPassed, setSecondsPassed] = useState(0)
 
 
-    function handleTaskSubmit(event: any) {
+    const activeCycle = newCyletimer.find((item) => item.id === activeCycleId)
+    
+    useEffect(() => {
+        if (activeCycle) {
+            setInterval(() => {
+                setSecondsPassed(differenceInSeconds(new Date(), activeCycle.startData))
+            }, 1000)
+        }
+        console.log(activeCycle)
+    }, [activeCycle])
+
+    
+    function handleTaskSubmit(event: FormEvent<HTMLFormElement>) {
         event.preventDefault()
 
-        function onClick() {
-            console.log('teste')
-        }
-        
-        const data = new FormData(event.target)
-        const taskName = String(data.get('taskName'))
-        const taskMinutes = Number(data.get('taskMinutes'))
-        
-        setNameTask(taskName)
-        setTaskAmountMinutes(taskMinutes)
+        const form = event.target as HTMLFormElement
+        const data = new FormData(form)
 
-        console.log( taskName, taskAmountMinutes)
+        const taskData: NewCycleTimer = {
+            id: String(new Date().getTime()),
+            taskName: String(data.get('taskName')),
+            taskMinutes: Number(data.get('taskMinutes')),
+            startData: new Date()
+        }
+
+        setNewCycleTimer((state) => [...state, taskData])
+        setActiveCycleId(taskData.id)
     }
+    
+
+    const totalSecods = activeCycle ? activeCycle.taskMinutes * 60 : 0
+    const currentSeconds = activeCycle ? totalSecods - secondsPassed : 0
+
+    const minutesAmount = Math.floor(currentSeconds / 5)
+    const secondsAmount = currentSeconds % 60
+
+    const minutes = String(minutesAmount).padStart(2, '0')
+    const seconds = String(secondsAmount).padStart(2, '0')
 
 
     return (
@@ -96,8 +128,8 @@ export function TimerTask() {
             </div>
 
             <div className='flex flex-col leading-[180px] absolute text-[160px] top-0 left-0 translate-y-1/2 -translate-x-1/2'>
-                <span>2  5</span>
-                <span>3  4</span>
+                <span>{`${minutes[0]} ${minutes[1]}` }</span>
+                <span>{`${seconds[0]} ${seconds[1]}`}</span>
             </div>
         </div>
     )
