@@ -29,6 +29,7 @@ export function TimerTask() {
 
     // const [newCycleTimer, setNewCycleTimer] = useState<CycleTimer[]>([])
     const [newCycleTimer, dispatch] = useReducer((state: CycleTimer[], action: any) => {
+        console.log(state,action)
         switch (action.type) {
             case 'ADD_NEW_TASK':
                 return [...state, action.payload.data];
@@ -178,9 +179,9 @@ export function TimerTask() {
                     />
 
                     <datalist id='task-suggestions'>
-                        <option value="Projeto1" />
-                        <option value="Projeto2" />
-                        <option value="Projeto3" />
+                        <option value="Time to study" />
+                        <option value="Take a break" />
+                        <option value="Procrastinete" />
                     </datalist>
 
 
