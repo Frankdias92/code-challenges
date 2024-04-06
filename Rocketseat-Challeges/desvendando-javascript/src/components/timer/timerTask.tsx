@@ -1,5 +1,5 @@
 import { caveat } from '@/app/fonts';
-import { Button } from "@nextui-org/react";
+import { Button, ScrollShadow } from "@nextui-org/react";
 import { useFocusRing } from '@react-aria/focus';
 import { differenceInSeconds } from 'date-fns';
 import { FormEvent, useEffect, useReducer, useState } from 'react';
@@ -233,11 +233,17 @@ export function TimerTask() {
 
                 <div className="flex flex-col mt-[86px]">
                     <span className="text-4xl">TASKS</span>
-                    {newCycleTimer ? newCycleTimer.map((item) => {
-                        return (
-                            <div key={item.id} className={`${caveat.className} text-2xl`}>{item.taskName}</div>
-                        )
-                    }) : '...'}
+                        <ScrollShadow 
+                            hideScrollBar
+                            orientation="horizontal" 
+                            className="max-h-[115px]"
+                        >
+                            {newCycleTimer ? newCycleTimer.map((item) => {
+                                return (
+                                    <div key={item.id} className={`${caveat.className} text-2xl`}>{item.taskName}</div>
+                                )
+                            }) : '...'}
+                        </ScrollShadow>
                 </div>
             </div>
 
