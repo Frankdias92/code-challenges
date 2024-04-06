@@ -24,7 +24,7 @@ function Countdown() {
     return <h1>Countdown: { exampleTest }</h1>
 }
 
-export function Home() {
+export function ContextAPI() {
     const [exampleTest, setExampleTest] = useState(0)
 
     return  (

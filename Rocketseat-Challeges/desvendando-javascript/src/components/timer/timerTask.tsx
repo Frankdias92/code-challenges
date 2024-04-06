@@ -2,8 +2,7 @@ import { caveat } from '@/app/fonts';
 import { Button } from "@nextui-org/react";
 import { useFocusRing } from '@react-aria/focus';
 import { differenceInSeconds } from 'date-fns';
-import { stat } from 'fs';
-import { FormEvent, useEffect, useState } from 'react';
+import { FormEvent, useEffect, useReducer, useState } from 'react';
 
 interface CycleTimer {
     id: number;
@@ -14,25 +13,40 @@ interface CycleTimer {
     finishedDate?: Date;
 }
 
+
 export function TimerTask() {
     let { isFocusVisible, focusProps } = useFocusRing();
-    const [isSubmitDisabled, setIsSubmitDisabled] = useState<string>('');
 
-    const [newCycleTimer, setNewCycleTimer] = useState<CycleTimer[]>([]);
-    const [isActive, setIsActive] = useState<number | null>(null);
     const [startTime, setStartTime] = useState<Date | null>(null);
-
-    const [seconds, setSeconds] = useState(0);
-    const [activeId, setActiveId] = useState<number | null>(null)
-    const [timerActive, setTimerActive] = useState<boolean>(false)
+    const [isSubmitDisabled, setIsSubmitDisabled] = useState<string>('');
     const [btnSwitch, setBtnSwitch] = useState<boolean>(false)
     
+    const [timerActive, setTimerActive] = useState<boolean>(false)
+    const [activeId, setActiveId] = useState<number | null>(null)
+    const [isActive, setIsActive] = useState<number | null>(null);
+    const [seconds, setSeconds] = useState(0);
+    
 
+    // const [newCycleTimer, setNewCycleTimer] = useState<CycleTimer[]>([])
+    const [newCycleTimer, dispatch] = useReducer((state: CycleTimer[], action: any) => {
+        switch (action.type) {
+            case 'ADD_NEW_TASK':
+                return [...state, action.payload.data];
+            case 'INTERRUPT_CURRENT_TASK':
+                return state.map((item) => {
+                    if (item.id === action.payload.activeId) {
+                        return { ...item, interruptedDate: new Date() };
+                    } else {
+                        return item;
+                    }
+                });
+            default:
+                return state;
+        }
+    }, []);
 
     const activeCycle = newCycleTimer.find((item) => item.id && isActive);
     const totalSeconds = activeCycle ? activeCycle.taskMinutes * 60 : 0;
-
-    // console.log(isActive, 'activeCycle', activeCycle?.id, activeId)
  
     useEffect(() => {
         let interval: NodeJS.Timeout | null = null;
@@ -43,13 +57,21 @@ export function TimerTask() {
                 setSeconds(secondsDifference)
 
                 if (secondsDifference >= totalSeconds) {
-                    setNewCycleTimer(state => state.map((item) => {
-                        if (item.id === activeId) {
-                            return { ...item, interruptedDate: new Date() }
-                        } else {
-                            return item;
-                        }
-                    }));
+
+                    dispatch({
+                        type: 'INTERRUPT_CURRENT_TASK',
+                        payload: {
+                            activeId,
+                        },
+                    })
+                            
+                    // newCycleTimer(state => state.map((item) => {
+                    //     if (item.id === activeId) {
+                    //         return { ...item, interruptedDate: new Date() }
+                    //     } else {
+                    //         return item;
+                    //     }
+                    // }));
 
                     setSeconds(0);
                 } else {
@@ -65,9 +87,6 @@ export function TimerTask() {
 
     }, [activeCycle, totalSeconds, activeId, timerActive]);
 
-
-
-
     function handleTaskSubmit(event: FormEvent<HTMLFormElement>) {
         event.preventDefault();
     
@@ -80,46 +99,53 @@ export function TimerTask() {
             taskMinutes: Number(data.get('taskMinutes')),
             startData: new Date()
         };
+
+        dispatch({
+            type: 'ADD_NEW_TASK',
+            payload: {
+                data: taskData,
+            },
+        })
     
-        // Limpa o temporizador anterior se houver
-        setNewCycleTimer((state) => state.map((item) => {
-            if (item.id === activeId && isActive) {
-                return { ...item, interruptedDate: new Date() };
-            }
-            return item;
-        }));
+        // // Limpa o temporizador anterior se houver
+        // dispatch((state) => state.map((item) => {
+        //     if (item.id === activeId && isActive) {
+        //         return { ...item, interruptedDate: new Date() };
+        //     }
+        //     return item;
+        // }));
     
-        // Inicia um novo temporizador
-        setNewCycleTimer([taskData]);
+        // Start new timer
+        // dispatch([taskData]);
         setActiveId(taskData.id);
         setIsActive(taskData.id);
         setSeconds(0)
         setTimerActive(true)
     }
 
-    function handleActiveState() {
-        if (activeId !== null) {
-            setIsActive(activeId);
-            setSeconds(0);
-        }
-    }
 
     function handleStopCycleTask() {
         if (activeId !== null) {
-            setNewCycleTimer((state) => state.map((item) => {
-                if (item.id === activeId) {
-                    setIsActive(null);
-                    setSeconds(0);
-                    return { ...item, interruptedDate: new Date() };
-                }
-                return item;
-            }));
-            setIsActive(null); // Limpa a tarefa ativa
+            dispatch({
+                type: 'INTERRUPT_CURRENT_TASK',
+                payload: {
+                    data: activeId,
+                },
+            })
+            // dispatch((state) => state.map((item) => {
+            //     if (item.id === activeId) {
+            //         setIsActive(null);
+            //         setSeconds(0);
+            //         return { ...item, interruptedDate: new Date() };
+            //     }
+            //     return item;
+            // }));
+            setIsActive(null); // Clear active timer
             setTimerActive(false)
         }
     }
 
-    console.log(newCycleTimer);
+    // console.log(newCycleTimer);
 
     const currentSeconds = isActive ? totalSeconds - seconds : 0;
 
@@ -207,9 +233,11 @@ export function TimerTask() {
 
                 <div className="flex flex-col mt-[86px]">
                     <span className="text-4xl">TASKS</span>
-                    <div className={`${caveat.className} text-2xl`}>Time to study</div>
-                    <div className={`${caveat.className} text-2xl`}>Take the trash out</div>
-                    <div className={`${caveat.className} text-2xl`}>Take a break</div>
+                    {newCycleTimer ? newCycleTimer.map((item) => {
+                        return (
+                            <div key={item.id} className={`${caveat.className} text-2xl`}>{item.taskName}</div>
+                        )
+                    }) : '...'}
                 </div>
             </div>
 
