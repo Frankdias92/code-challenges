@@ -1,0 +1,38 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+
+nav {
+  padding: 10px 0;
+  text-align: center;
+}
+
+
+nav a:hover {
+  color: #ffcc00;
+}
+
+
+
+
+
+  /* Backgrounds */
+  #home-page {
+    background-image: url('../src/space1.jpeg');
+    /* background-size: cover; */
+    background-position: center;
+  }
+  
+  body.universe {
+    background-image: url('../src/space2.jpeg');
+    background-size: cover;
+    background-position: center;
+  }
+  
+  body.exploration {
+    background-image: url('../src/space3.jpeg');
+    background-size: cover;
+    background-position: center;
+  }
+  
