@@ -40,7 +40,12 @@ export default function NavForms() {
                 </BreadcrumbItem>
                 <BreadcrumbItem key="timer" isCurrent={currentPage === "timer"}>
                     <Link className={`link ${pathname === '/timer' ? 'active' : ''}`} href={'/timer'}>
-                        Imc
+                        Timer
+                    </Link>
+                </BreadcrumbItem>
+                <BreadcrumbItem key="dashboard" isCurrent={currentPage === "dashboard"}>
+                    <Link className={`link ${pathname === '/dashboard' ? 'active' : ''}`} href={'/dashboard'}>
+                        Dashboard
                     </Link>
                 </BreadcrumbItem>
                 </Breadcrumbs>

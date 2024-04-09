@@ -11,7 +11,7 @@ const config: Config = {
     extend: {
       colors: {
         "explore-color-bg-primary": "#1B1B1B",
-        "explore-color-bg-secondary": "#282828",
+        "explore-color-bg-secondary": "#111111",
         "explore-color-text-first": "#676767",
         "explore-color-text-second": "#F2F2F2",
         "explore-color-offShore": "#F59D1A",

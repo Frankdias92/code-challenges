@@ -17,7 +17,7 @@ export default function FormsLayout({
 
 
     return (
-      <section className="flex flex-col gap-y-20">
+      <section className="flex flex-col gap-y-20 bg-explore-color-bg-primary">
         <Menu />
 
         <section className="flex flex-col gap-y-4 w-full">
