@@ -1,5 +1,5 @@
 import { IconEdit, IconLinkedin, IconUserX } from "@/lib/icons"
-import { ScrollShadow } from "@nextui-org/react"
+import { ScrollShadow, user } from "@nextui-org/react"
 import Link from "next/link"
 import { FormEvent, useEffect, useState } from "react"
 
@@ -39,8 +39,31 @@ export function GetUsers() {
 
         const updatedUser = new FormData(event.currentTarget);
 
+        const usersData = localStorage.getItem('dataUser') as string
+        if (!usersData) {
+            console.log('User not faund!')
+        }
+        const userData: UserData[] = JSON.parse(usersData)
+
+        const getCreateAd = (index: number) => {
+            if (index >= 0 && index < userData.length) {
+                return userData[index].createAt
+            }
+            console.error('Index invalid:', index)
+            return null
+        }
+
+        const createAt = getCreateAd(index)
+        if (createAt === null) {
+            console.log('Cannot possible find creatAd')
+        }
+
+        console.log("creatAd:", createAt)
+        
+
         const updatedDataUser: UserData = {
             id: users[index].id,
+            createAt: users[index].createAt,
             firtsName: String(updatedUser.get('first-name')),
             lastName: String(updatedUser.get('last-name')),
             dateBird: String(updatedUser.get('date-birth')),
@@ -97,9 +120,9 @@ export function GetUsers() {
                                 <Dialog.Trigger className="flex w-[50px]">
                                     <Button><IconEdit /></Button>
                                 </Dialog.Trigger>
-                                <Dialog.Overlay className='fixed inset-0 ring-0 bg-black/70 flex justify-center items-center m-auto'>
-                                    <Dialog.Content className="flex w-full h-full translate-x-1/4 p-10">
-                                        <section className='flex flex-col items-center justify-center  px-20 py-28 rounded-3xl bg-explore-color-bg-secondary relative'>
+                                <Dialog.Overlay className='fixed inset-0 ring-0 bg-black/80 flex justify-center items-center m-auto'>
+                                    <Dialog.Content className="flex w-full translate-x-1/4 p-10">
+                                        <section className='flex flex-col items-center justify-center  px-20 py-8 rounded-3xl bg-explore-color-bg-secondary relative'>
                                             <span className="text-xl font-bold mb-4">Edit profile</span>
                                         
                                             <Flex direction="column" gap="3">
@@ -142,7 +165,8 @@ export function GetUsers() {
                                                         </label>
                                                         <input
                                                             name="date-birth"
-                                                            type="text"
+                                                            type="date"
+                                                            placeholder=""
                                                             defaultValue={item.dateBird}
                                                             required
                                                             className="flex h-14 mb-2 pl-4 border-0 bg-transparent ring-1 ring-explore-color-text-first focus:ring-2 focus:ring-explore-color-offShore
@@ -170,7 +194,7 @@ export function GetUsers() {
                                                             className="flex col-span-2 text-xl items-center w-full h-[52px] tracking-widest font-bold place-content-center py-5 bg-explore-color-offShore rounded-xl mt-6 shadow-lg antialiased
                                                             outline-none border-0 focus:ring-2 focus:ring-explore-color-text-second"
                                                             >
-                                                                    UPDATE
+                                                                UPDATE
                                                         </Button>
                                                     
                                                     <Dialog.Close>

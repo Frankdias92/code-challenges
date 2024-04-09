@@ -7,21 +7,12 @@ interface FormUser {
     createAt: Date,
     firtsName: string,
     lastName: string,
-    dateBirt: string,
+    dateBirt: Date,
     mediaSocial: string,
 }
 
 export function FormAddUser() {
     let { isFocusVisible, focusProps } = useFocusRing()
-
-
-    const dataUsers = localStorage.getItem('dataUser')
-    useEffect(() => {
-        if (dataUsers) {
-            const parseData = JSON.parse(dataUsers);
-
-        }
-    }, [dataUsers]);
 
     
     function handleCreateUser(event: FormEvent<HTMLFormElement>) {
@@ -85,7 +76,7 @@ export function FormAddUser() {
             </label>
             <input 
                 name="date-birt"  
-                type="text"
+                type="date"
                 required
                 className="flex h-14 mb-2 pl-4 border-0 bg-transparent ring-1 ring-explore-color-text-first focus:ring-2 focus:ring-explore-color-offShore
                 invalid:text-red-600 rounded-lg outline-none"
