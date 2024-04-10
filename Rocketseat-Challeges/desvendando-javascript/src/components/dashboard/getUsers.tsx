@@ -6,9 +6,9 @@ import { FormEvent, useEffect, useState } from "react"
 import * as Dialog from '@radix-ui/react-dialog'
 import { Button, Flex, Text, TextField } from '@radix-ui/themes'
 
-interface UserData {
+export interface UserData {
     id: number
-    createAt?: string;
+    createAt?: number;
     firtsName: string;
     lastName: string;
     dateBird: string;
@@ -166,7 +166,7 @@ export function GetUsers() {
                                                         <input
                                                             name="date-birth"
                                                             type="date"
-                                                            placeholder=""
+                                                            
                                                             defaultValue={item.dateBird}
                                                             required
                                                             className="flex h-14 mb-2 pl-4 border-0 bg-transparent ring-1 ring-explore-color-text-first focus:ring-2 focus:ring-explore-color-offShore
@@ -220,5 +220,6 @@ export function GetUsers() {
                 </ScrollShadow>
             </section>
         </div>
-    );
+    )
 }
+

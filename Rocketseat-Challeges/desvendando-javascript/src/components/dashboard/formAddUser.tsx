@@ -1,6 +1,7 @@
 import { Button } from "@nextui-org/react";
 import { useFocusRing } from "@react-aria/focus";
 import { FormEvent, useEffect, useState } from "react";
+import { UserData } from "./getUsers";
 
 interface FormUser {
     id: number,
@@ -11,8 +12,13 @@ interface FormUser {
     mediaSocial: string,
 }
 
-export function FormAddUser() {
+interface FormAddUserProps {
+    onUserAdded: () => void;
+}
+
+export function FormAddUser({ onUserAdded}: FormAddUserProps) {
     let { isFocusVisible, focusProps } = useFocusRing()
+    const [users, setUsers] = useState<UserData[]>([])
 
     
     function handleCreateUser(event: FormEvent<HTMLFormElement>) {
@@ -24,21 +30,22 @@ export function FormAddUser() {
         const NewDataUser = {
             id: Number(new Date().getTime()),
             createAt: new Date().getFullYear(),
-            firtsName: data.get('first-name'),
-            lastName: data.get('last-name'),
-            dateBird: data.get('date-birt'),
-            mediaSocial: data.get('media-social'),
+            firtsName: data.get('first-name') as string,
+            lastName: data.get('last-name') as string,
+            dateBird: data.get('date-birt') as string,
+            mediaSocial: data.get('media-social') as string,
         }
  
         let storeUsers = localStorage.getItem('dataUser')
-        let allUsers = []
+        let allUsers: UserData[] = []
 
         if (storeUsers) {
             allUsers = JSON.parse(storeUsers)
         }
 
         allUsers.push(NewDataUser)
-
+        
+        setUsers(allUsers)
         localStorage.setItem('dataUser', JSON.stringify(allUsers))
     }
 
