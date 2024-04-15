@@ -1,23 +1,49 @@
 'use client'
 
 
-import { Button } from "@nextui-org/react"
-import { useFocusRing } from "@react-aria/focus"
-
+import { LogginAccount } from '@/components/login/formLoggin'
 import login from '../../assets/imgs/login1.jpeg'
 import Image from "next/image"
-import { CreateAccount } from "@/components/login/formLoggin"
+import { useState } from 'react'
+import { CreateAccount } from '@/components/login/formCreateAccount'
 
 
 export default function Login() {
-    let { isFocusVisible, focusProps } = useFocusRing()
+    const [newAccount, setNewAccount] = useState(false)
+
+    function handleNewAccount() {
+        if (newAccount == true) {
+            setNewAccount(!true)
+        } else {
+            setNewAccount(true)
+        }
+    }
     
 
     return (
-        <section className="flex w-full min-h-full flex-col justify-between">
-            <div className="grid grid-cols-2 w-3/4 h-[754px] justify-center items-center m-auto">
-                <div className="flex flex-col w-full h-4/5l px-10 gap-y-8 items-start justify-center">
-                    <CreateAccount />
+        <section className="flex w-full min-h-full flex-col justify-between ">
+            <div className="grid grid-cols-2 w-3/4 h-[754px] justify-center items-center m-auto my-[120px]">
+                <div className="flex flex-col w-full px-10 gap-y-8 items-start">
+                    {newAccount ? 
+                    ( 
+                    <>
+                        <LogginAccount />
+                        <span className='flex flex-col gap-5 items-center justify-center w-[90%]'>
+                            <div className='w-full h-0.5 bg-explore-color-text-second/20'/>
+                            <span className='text-sm'>or</span>
+                            <button className='m-auto' onClick={handleNewAccount}>Create a new account</button>
+                        </span>
+                    </> 
+                    ) : (
+                    <>
+                        <CreateAccount />
+                        <span className='flex flex-col gap-5 items-center justify-center w-[90%]'>
+                            <div className='w-full h-0.5 bg-explore-color-text-second/20'/>
+                            <span className='text-sm'>or</span>
+                            <button className='m-auto' onClick={handleNewAccount}>Log - in</button>
+                        </span>
+                    </>
+                    )}
                 </div>
 
 

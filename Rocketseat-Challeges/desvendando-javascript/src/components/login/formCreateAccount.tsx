@@ -3,7 +3,7 @@ import { Button } from "@nextui-org/react"
 import { useFocusRing } from "@react-aria/focus"
 
 
-export function LogginAccount() {
+export function CreateAccount() {
     let { isFocusVisible, focusProps } = useFocusRing()
 
     
@@ -20,6 +20,17 @@ export function LogginAccount() {
                 // onSubmit={onSubmit}
                 className="flex flex-col w-full font-poppins lg:w-[90%]"
             >
+                <label className="mb-2 text-sm">
+                    Your name
+                </label>
+                <input 
+                    name="name"  
+                    type="text"
+                    required
+                    className="flex h-14 mb-2 pl-4 border-0 bg-transparent ring-1 ring-explore-color-text-first focus:ring-2 focus:ring-explore-color-offShore
+                    invalid:text-red-600 rounded-lg outline-none"
+                />
+
 
                 <label className="mb-2 text-sm">
                     E-mail adress
@@ -33,7 +44,7 @@ export function LogginAccount() {
                 />
 
                 <label className="mb-2 text-sm">
-                    Password
+                    Create password
                 </label>
                 <input 
                     name="password"  
@@ -53,7 +64,6 @@ export function LogginAccount() {
                 >
                     Login
                 </Button>
-
             </form>
         </>
     )
