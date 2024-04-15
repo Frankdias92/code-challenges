@@ -24,30 +24,32 @@ export function Result({ handleClickContent }: handleClickContentProps) {
 
         try {
             const formData = new FormData(event.currentTarget);
-            const response = await fetch("http://localhost:3333/response", {
-                method: "POST",
-                headers: {
-                    "Content-Type": "application/json",
-                },
-                body: JSON.stringify(Object.fromEntries(formData)),
-            });
+            const name = formData.get('name') as string;
+            const number1 = Number(formData.get('value1'))
+            const number2 = Number(formData.get('value2'))
+            // const response = await fetch("http://localhost:3333/response", {
+            //     method: "POST",
+            //     headers: {
+            //         "Content-Type": "application/json",
+            //     },
+            //     body: JSON.stringify(Object.fromEntries(formData)),
+            // });
     
-            if (!response.ok) {
-                throw new Error("Falha na requisição");
-            }
+            // if (!response.ok) {
+            //     throw new Error("Falha na requisição");
+            // }
     
-            const responseData = await response.json();
-            const { name, firstNumber, secondNumber } = responseData;
+            // const responseData = await response.json();
+            // const { name, firstNumber, secondNumber } = responseData;
     
-            if (!name || !firstNumber || !secondNumber) {
-                throw new Error("Dados inválidos recebidos do servidor");
-            }
+            // if (!name || !firstNumber || !secondNumber) {
+            //     throw new Error("Dados inválidos recebidos do servidor");
+            // }
     
             setNameUser(name);
-            setvalue1(firstNumber);
-            setvalue2(secondNumber);
+            setvalue1(number1);
+            setvalue2(number1);
     
-            console.log("Dados recebidos:", responseData);
         } catch (error) {
             console.error("Erro ao processar a requisição:", error);
         }
