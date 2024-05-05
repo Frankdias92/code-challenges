@@ -48,8 +48,11 @@ export default function Home() {
 
             </div>
           ) : (
-            <span className="flex justify-center py-20 w-full pointer-events-none">
-              {`123`}
+            <span className="flex flex-col gap-2 items-center justify-center py-20 w-full pointer-events-none">
+              <span className="text-xl font-extrabold tracking-widest">
+                {`What's up Zapper!`}
+              </span>
+              {`what's the pearl of the day?`}
             </span>
           )}
         </div>
