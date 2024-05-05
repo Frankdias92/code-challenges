@@ -11,8 +11,5 @@
   "license": "ISC",
   "dependencies": {
     "lite-server": "^2.6.1"
-  },
-  "devDependencies": {
-    "tailwindcss": "^3.4.3"
   }
 }

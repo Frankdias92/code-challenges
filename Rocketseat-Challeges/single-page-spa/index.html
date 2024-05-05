@@ -6,20 +6,26 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>SPA</title>
 
+  <link rel="stylesheet" href="./index.css">
+  <link rel="stylesheet" href="./pages/style/output.css">
   <link rel="stylesheet" href="./pages/style/index.css">
 
-  <link href="./pages/style/output.css" rel="stylesheet">
 </head>
 
 <body>
-  <nav class="flex justify-start">
-    <a href="/" onclick="route()">Home</a>
-    <a href="/universe" onclick="route()">O Universo</a>
-    <a href="/exploration" onclick="route()">Exploração</a>
-  </nav>
+  <header>        
+      <nav>
+          <ul>
+              <li><a href="/" onclick="route()">Home</a></li>
+              <li><a href="/universe" onclick="route()">O Universo</a></li>
+              <li><a href="/exploration" onclick="route()">Exploração</a></li>
+          </ul>
+      </nav>
+  </header>
 
-  <div id="app" ></div>
-
-  <script src="js/index.js" type="module"></script>
+  <main>
+      <div id="app"></div>
+  </main>
+  <script src="./js/index.js" type="module"></script>
 </body>
 </html>
